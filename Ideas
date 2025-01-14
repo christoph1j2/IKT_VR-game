@@ -1,0 +1,14 @@
+Nápady:
+- procedurálně generovaný levely pomocí tile setu
+- od začátku do konce težší a těžší enemáci
+- low poly
+- místonsti:
+  start
+  trap
+  fight
+  loot
+  boss
+- z loot místnosti dostaneš měnu
+- měna se použije po smrti na zlepšení statů
+- jednoduchý fight system mlácení
+- dodging feature (zejména u bosse)
