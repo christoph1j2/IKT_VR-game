@@ -1,0 +1,216 @@
+newmtl Magazine1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Magazine1_diff.png
+map_Kd Magazine1_diff.png
+map_d Magazine1_diff.png
+
+map_Bump Magazine1_nmap.png
+
+map_Ns Magazine1_spec.png
+
+newmtl Lens1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Lens1_diff.png
+map_Kd Lens1_diff.png
+map_d Lens1_diff.png
+
+map_Bump Lens1_nmap.png
+
+map_Ns Lens1_spec.png
+
+newmtl Peq151Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Peq151_diff.png
+map_Kd Peq151_diff.png
+map_d Peq151_diff.png
+
+map_Bump Peq151_nmap.png
+
+map_Ns Peq151_spec.png
+
+newmtl MagazineRelease1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka MagazineRelease1_diff.png
+map_Kd MagazineRelease1_diff.png
+map_d MagazineRelease1_diff.png
+
+map_Bump MagazineRelease1_nmap.png
+
+map_Ns MagazineRelease1_spec.png
+
+newmtl MuzzleDevice1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka MuzzleDevice1_diff.png
+map_Kd MuzzleDevice1_diff.png
+map_d MuzzleDevice1_diff.png
+
+map_Bump MuzzleDevice1_nmap.png
+
+map_Ns MuzzleDevice1_spec.png
+
+newmtl PicatinnyMount1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka PicatinnyMount1_diff.png
+map_Kd PicatinnyMount1_diff.png
+map_d PicatinnyMount1_diff.png
+
+map_Bump PicatinnyMount1_nmap.png
+
+map_Ns PicatinnyMount1_spec.png
+
+newmtl BarrelAssembly1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka BarrelAssembly1_diff.png
+map_Kd BarrelAssembly1_diff.png
+map_d BarrelAssembly1_diff.png
+
+map_Bump BarrelAssembly1_nmap.png
+
+map_Ns BarrelAssembly1_spec.png
+
+newmtl Handguard1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Handguard1_diff.png
+map_Kd Handguard1_diff.png
+map_d Handguard1_diff.png
+
+map_Bump Handguard1_nmap.png
+
+map_Ns Handguard1_spec.png
+
+newmtl Foregrip1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Foregrip1_diff.png
+map_Kd Foregrip1_diff.png
+map_d Foregrip1_diff.png
+
+map_Bump Foregrip1_nmap.png
+
+map_Ns Foregrip1_spec.png
+
+newmtl StockPivot1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka StockPivot1_diff.png
+map_Kd StockPivot1_diff.png
+map_d StockPivot1_diff.png
+
+map_Bump StockPivot1_nmap.png
+
+map_Ns StockPivot1_spec.png
+
+newmtl PistolGrip1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka PistolGrip1_diff.png
+map_Kd PistolGrip1_diff.png
+map_d PistolGrip1_diff.png
+
+map_Bump PistolGrip1_nmap.png
+
+map_Ns PistolGrip1_spec.png
+
+newmtl Stock1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Stock1_diff.png
+map_Kd Stock1_diff.png
+map_d Stock1_diff.png
+
+map_Bump Stock1_nmap.png
+
+map_Ns Stock1_spec.png
+

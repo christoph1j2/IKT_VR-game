@@ -1,0 +1,24 @@
+newmtl Smiler1Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.666667 0.666667 0.666667 
+
+d 1
+
+Ns 255
+
+map_Ka Smiler1_diff.png
+map_Kd Smiler1_diff.png
+map_d Smiler1_diff.png
+
+newmtl Eye1Mtl
+Material Color
+Ka 0.851252 0.827726 0.827726
+Kd 0.851252 0.827726 0.827726
+Ks 0.0767796 0.0746576 0.0746576 
+
+d 1
+
+Ns 0
+

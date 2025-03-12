@@ -1,0 +1,54 @@
+newmtl Part3Mtl
+Material Color
+Ka 0.00258583 0.00258583 0.00258583
+Kd 0.00258583 0.00258583 0.00258583
+Ks 0.00172388 0.00172388 0.00172388 
+
+d 1
+
+Ns 255
+
+map_Ka Part3_diff.png
+map_Kd Part3_diff.png
+map_d Part3_diff.png
+
+map_Bump Part3_nmap.png
+
+map_Ns Part3_spec.png
+
+newmtl Mouth1Mtl
+Material Color
+Ka 0.940601 0.940601 0.940601
+Kd 0.940601 0.940601 0.940601
+Ks 0.0848385 0.0848385 0.0848385 
+
+d 1
+
+Ns 0
+
+newmtl Part11Mtl
+Material Color
+Ka 0.00258583 0.00258583 0.00258583
+Kd 0.00258583 0.00258583 0.00258583
+Ks 0.00172388 0.00172388 0.00172388 
+
+d 1
+
+Ns 255
+
+map_Ka Part11_diff.png
+map_Kd Part11_diff.png
+map_d Part11_diff.png
+
+map_Bump Part11_nmap.png
+
+newmtl Head1Mtl
+Material Color
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0 
+
+d 0.901961
+
+Ns 0
+
