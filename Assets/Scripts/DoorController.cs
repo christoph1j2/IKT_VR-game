@@ -19,6 +19,10 @@ public class DoorController : MonoBehaviour
     [Header("Debug Options")]
     [Tooltip("Enable to test door opening without player interaction")]
     public bool testMode = true;
+
+    [Header("Enemy Spawning")]
+    public bool spawnEnemiesOnOpen = true;
+    public EnemySpawnManager spawnManager;
     
     // Door state tracking
     private bool isOpen = false;
@@ -103,6 +107,11 @@ public class DoorController : MonoBehaviour
         {
             Debug.Log("Player detected near door!");
             isPlayerNear = true;
+            if (spawnEnemiesOnOpen && spawnManager != null && !isOpen)
+            {
+                Debug.Log("Triggering enemy spawn!");
+                spawnManager.SpawnEnemies();
+            }
         }
     }
     
