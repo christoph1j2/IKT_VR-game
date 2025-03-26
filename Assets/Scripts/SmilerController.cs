@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.AI; // Required for NavMesh
+using UnityEngine.AI;
 
 public class SmilerController : MonoBehaviour
 {
@@ -7,11 +7,16 @@ public class SmilerController : MonoBehaviour
     public float moveSpeed = 2f;
     public float rotationSpeed = 5f;
     public float detectionRange = 10f;
-    public bool useNavMesh = false; // Set true if using NavMesh
+    public bool useNavMesh = false;
+    
+    [Header("Visual Settings")]
+    [Tooltip("Adjust this if the model needs to be rotated to face correctly")]
+    public float visualRotationOffset = 90f;
     
     [Header("References")]
     private Transform playerTransform;
     private NavMeshAgent navAgent;
+    private Rigidbody rb;
     
     private void Start()
     {
@@ -24,6 +29,13 @@ public class SmilerController : MonoBehaviour
         else
         {
             Debug.LogError("Player not found! Make sure Player has the 'Player' tag");
+        }
+        
+        // Get rigidbody if exists
+        rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         }
         
         // Setup NavMesh if enabled
@@ -48,32 +60,61 @@ public class SmilerController : MonoBehaviour
     {
         if (playerTransform == null) return;
         
+        // Always face the player regardless of distance
+        FacePlayer();
+        
+        // Only move toward the player when in detection range
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         
         if (distanceToPlayer <= detectionRange)
         {
+            // Calculate direction to player
+            Vector3 direction = (playerTransform.position - transform.position).normalized;
+            
             if (useNavMesh && navAgent != null)
             {
-                // NavMesh movement (more advanced, handles obstacles)
+                // NavMesh movement
                 navAgent.SetDestination(playerTransform.position);
             }
             else
-            {
-                // Simple direct movement
-                // Calculate direction to player
-                Vector3 direction = (playerTransform.position - transform.position).normalized;
+            {                
+                // Calculate movement in the correct direction (regardless of facing)
+                Vector3 movementDirection = direction * moveSpeed * Time.deltaTime;
                 
-                // Rotate towards player
-                Quaternion lookRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-                
-                // Move towards player
-                transform.position += transform.forward * moveSpeed * Time.deltaTime;
+                // Apply movement directly toward player (ignoring where the model faces)
+                if (rb != null)
+                {
+                    // Rigidbody movement - maintain Y velocity for gravity
+                    Vector3 velocity = new Vector3(direction.x * moveSpeed, rb.linearVelocity.y, direction.z * moveSpeed);
+                    rb.linearVelocity = velocity;
+                }
+                else
+                {
+                    // Transform-based movement
+                    transform.position += movementDirection;
+                }
             }
+        }
+        else if (rb != null)
+        {
+            // When not in range, maintain vertical velocity but zero out horizontal
+            Vector3 velocity = new Vector3(0, rb.linearVelocity.y, 0);
+            rb.linearVelocity = velocity;
         }
     }
     
-    // Optional: visualize detection range
+    private void FacePlayer()
+    {
+        // Calculate direction to player
+        Vector3 direction = (playerTransform.position - transform.position).normalized;
+        
+        // The model rotation is separate from the movement direction
+        // Rotate the character to face the player with offset
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        lookRotation *= Quaternion.Euler(0, visualRotationOffset, 0);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+    }
+    
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
