@@ -13,6 +13,26 @@ public class SmilerController : MonoBehaviour
     [Tooltip("Adjust this if the model needs to be rotated to face correctly")]
     public float visualRotationOffset = 90f;
     
+    [Header("Arm Animation")]
+    public Transform leftArm;
+    public Transform rightArm;
+    public float armRaiseSpeed = 5f;
+    
+    [Tooltip("Z rotation for raised left arm")]
+    public float leftArmRaisedRotationZ = -80.729f;
+    
+    [Tooltip("Z rotation for raised right arm")]
+    public float rightArmRaisedRotationZ = 80.729f; // Mirror of left arm, adjust as needed
+    
+    // Store initial arm rotations
+    private Quaternion leftArmInitialRotation;
+    private Quaternion rightArmInitialRotation;
+    private Quaternion leftArmRaisedRotation;
+    private Quaternion rightArmRaisedRotation;
+    
+    // Track if arms are raised
+    private bool armsRaised = false;
+    
     [Header("References")]
     private Transform playerTransform;
     private NavMeshAgent navAgent;
@@ -29,6 +49,19 @@ public class SmilerController : MonoBehaviour
         else
         {
             Debug.LogError("Player not found! Make sure Player has the 'Player' tag");
+        }
+        
+        // Store initial arm rotations
+        if (leftArm != null)
+        {
+            leftArmInitialRotation = leftArm.localRotation;
+            leftArmRaisedRotation = Quaternion.Euler(0, 0, leftArmRaisedRotationZ);
+        }
+        
+        if (rightArm != null)
+        {
+            rightArmInitialRotation = rightArm.localRotation;
+            rightArmRaisedRotation = Quaternion.Euler(0, 0, rightArmRaisedRotationZ);
         }
         
         // Get rigidbody if exists
@@ -63,9 +96,13 @@ public class SmilerController : MonoBehaviour
         // Always face the player regardless of distance
         FacePlayer();
         
-        // Only move toward the player when in detection range
+        // Check distance to player
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         
+        // Handle arm animation based on distance
+        UpdateArmPositions(distanceToPlayer <= detectionRange);
+        
+        // Only move toward the player when in detection range
         if (distanceToPlayer <= detectionRange)
         {
             // Calculate direction to player
@@ -77,11 +114,11 @@ public class SmilerController : MonoBehaviour
                 navAgent.SetDestination(playerTransform.position);
             }
             else
-            {                
-                // Calculate movement in the correct direction (regardless of facing)
+            {
+                // Calculate movement in the correct direction
                 Vector3 movementDirection = direction * moveSpeed * Time.deltaTime;
                 
-                // Apply movement directly toward player (ignoring where the model faces)
+                // Apply movement directly toward player
                 if (rb != null)
                 {
                     // Rigidbody movement - maintain Y velocity for gravity
@@ -108,11 +145,59 @@ public class SmilerController : MonoBehaviour
         // Calculate direction to player
         Vector3 direction = (playerTransform.position - transform.position).normalized;
         
-        // The model rotation is separate from the movement direction
         // Rotate the character to face the player with offset
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         lookRotation *= Quaternion.Euler(0, visualRotationOffset, 0);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+    }
+    
+    private void UpdateArmPositions(bool playerInRange)
+    {
+        // No arms assigned, nothing to do
+        if (leftArm == null || rightArm == null) return;
+        
+        if (playerInRange && !armsRaised)
+        {
+            // Raise arms when player enters range
+            leftArm.localRotation = Quaternion.Slerp(
+                leftArm.localRotation,
+                leftArmRaisedRotation,
+                Time.deltaTime * armRaiseSpeed
+            );
+            
+            rightArm.localRotation = Quaternion.Slerp(
+                rightArm.localRotation,
+                rightArmRaisedRotation,
+                Time.deltaTime * armRaiseSpeed
+            );
+            
+            // Check if arms are nearly in raised position
+            if (Quaternion.Angle(leftArm.localRotation, leftArmRaisedRotation) < 0.1f)
+            {
+                armsRaised = true;
+            }
+        }
+        else if (!playerInRange && armsRaised)
+        {
+            // Lower arms when player exits range
+            leftArm.localRotation = Quaternion.Slerp(
+                leftArm.localRotation,
+                leftArmInitialRotation,
+                Time.deltaTime * armRaiseSpeed
+            );
+            
+            rightArm.localRotation = Quaternion.Slerp(
+                rightArm.localRotation,
+                rightArmInitialRotation, 
+                Time.deltaTime * armRaiseSpeed
+            );
+            
+            // Check if arms are nearly in lowered position
+            if (Quaternion.Angle(leftArm.localRotation, leftArmInitialRotation) < 0.1f)
+            {
+                armsRaised = false;
+            }
+        }
     }
     
     private void OnDrawGizmosSelected()
