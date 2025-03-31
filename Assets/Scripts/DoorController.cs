@@ -9,6 +9,12 @@ public class DoorController : MonoBehaviour
     public float openSpeed = 2f;
     public bool autoClose = true;
     
+    [Header("VR Settings")]
+    [Tooltip("Tags that can interact with the door (add your hand tag)")]
+    public string[] interactionTags = new string[] { "Player", "Hand", "VRController", "Controller" };
+    [Tooltip("Enable this to see debug messages")]
+    public bool showDebug = true;
+    
     [Header("Enemy Spawning")]
     public bool spawnEnemiesOnOpen = true;
     public EnemySpawnManager spawnManager;
@@ -36,6 +42,11 @@ public class DoorController : MonoBehaviour
         
         // Calculate the open rotation
         targetRotation = initialRotation * Quaternion.Euler(0, openAngle, 0);
+        
+        if (showDebug)
+        {
+            Debug.Log("Door Controller initialized. Looking for these interaction tags: " + string.Join(", ", interactionTags));
+        }
     }
     
     private void Update()
@@ -54,6 +65,7 @@ public class DoorController : MonoBehaviour
             if (Quaternion.Angle(door.transform.rotation, targetRotation) < 0.1f)
             {
                 isOpen = true;
+                if (showDebug) Debug.Log("Door fully opened");
             }
         }
         else if (!isPlayerNear && isOpen && autoClose)
@@ -71,7 +83,7 @@ public class DoorController : MonoBehaviour
                 isOpen = false;
                 // Reset spawn status when door fully closes
                 enemiesSpawned = false;
-                Debug.Log("Door closed, reset spawn state");
+                if (showDebug) Debug.Log("Door closed, reset spawn state");
             }
         }
     }
@@ -84,17 +96,26 @@ public class DoorController : MonoBehaviour
         // Lock to prevent concurrent processing
         processingTrigger = true;
         
-        // Check if the player entered the trigger
-        if (other.CompareTag("Player"))
+        if (showDebug) Debug.Log($"Trigger entered by: {other.gameObject.name} with tag: {other.tag}");
+        
+        // Check if the object that entered has one of our valid interaction tags
+        foreach (string tag in interactionTags)
         {
-            isPlayerNear = true;
-            
-            // Only spawn enemies if door is closed and enemies haven't spawned yet
-            if (spawnEnemiesOnOpen && spawnManager != null && !isOpen && !enemiesSpawned)
+            if (other.CompareTag(tag))
             {
-                Debug.Log("Triggering enemy spawn!");
-                spawnManager.SpawnEnemies();
-                enemiesSpawned = true;
+                if (showDebug) Debug.Log($"Valid interaction detected from: {other.gameObject.name} with tag: {other.tag}");
+                isPlayerNear = true;
+                
+                // Only spawn enemies if door is closed and enemies haven't spawned yet
+                if (spawnEnemiesOnOpen && spawnManager != null && !isOpen && !enemiesSpawned)
+                {
+                    Debug.Log("Triggering enemy spawn!");
+                    spawnManager.SpawnEnemies();
+                    enemiesSpawned = true;
+                }
+                
+                // Found a match, no need to check other tags
+                break;
             }
         }
         
@@ -104,9 +125,52 @@ public class DoorController : MonoBehaviour
     
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        // Check if the object that exited has one of our valid interaction tags
+        foreach (string tag in interactionTags)
         {
-            isPlayerNear = false;
+            if (other.CompareTag(tag))
+            {
+                isPlayerNear = false;
+                if (showDebug) Debug.Log($"Interaction object exited: {other.gameObject.name}");
+                break;
+            }
+        }
+    }
+    
+    // This will detect ALL collisions, not just triggers
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (showDebug) Debug.Log($"COLLISION with: {collision.gameObject.name}, tag: {collision.gameObject.tag}");
+        
+        // Check if the object that collided has one of our valid interaction tags
+        foreach (string tag in interactionTags)
+        {
+            if (collision.gameObject.CompareTag(tag))
+            {
+                isPlayerNear = true;
+                
+                // Only spawn enemies if door is closed and enemies haven't spawned yet
+                if (spawnEnemiesOnOpen && spawnManager != null && !isOpen && !enemiesSpawned)
+                {
+                    Debug.Log("Triggering enemy spawn from collision!");
+                    spawnManager.SpawnEnemies();
+                    enemiesSpawned = true;
+                }
+                break;
+            }
+        }
+    }
+    
+    private void OnCollisionExit(Collision collision)
+    {
+        // Check if the object that exited collision has one of our valid interaction tags
+        foreach (string tag in interactionTags)
+        {
+            if (collision.gameObject.CompareTag(tag))
+            {
+                isPlayerNear = false;
+                break;
+            }
         }
     }
 }

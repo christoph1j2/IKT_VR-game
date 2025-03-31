@@ -50,8 +50,8 @@
       "type": "boolean"
     },
     {
-      "name": "/actions/default/in/NewAction",
-      "type": "boolean"
+      "name": "/actions/default/in/Move",
+      "type": "vector2"
     },
     {
       "name": "/actions/default/out/Haptic",
@@ -90,7 +90,7 @@
   "action_sets": [
     {
       "name": "/actions/default",
-      "usage": "single"
+      "usage": "leftright"
     },
     {
       "name": "/actions/platformer",
