@@ -11,7 +11,7 @@ public class DoorController : MonoBehaviour
     
     [Header("VR Settings")]
     [Tooltip("Tags that can interact with the door (add your hand tag)")]
-    public string[] interactionTags = new string[] { "Player", "Hand", "VRController", "Controller" };
+    public string[] interactionTags = new string[] { "Player", "Controller" };
     [Tooltip("Enable this to see debug messages")]
     public bool showDebug = true;
     
