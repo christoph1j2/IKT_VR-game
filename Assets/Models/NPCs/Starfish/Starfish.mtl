@@ -1,0 +1,24 @@
+newmtl Teeth1Mtl
+Material Color
+Ka 0.311181 0.320382 0.436813
+Kd 0.311181 0.320382 0.436813
+Ks 0.0195251 0.0201024 0.0274079 
+
+d 1
+
+Ns 0
+
+newmtl Body1Mtl
+Material Color
+Ka 0.0494335 0.0511221 0.0697271
+Kd 0.0494335 0.0511221 0.0697271
+Ks 0.0195795 0.0202483 0.0276174 
+
+d 1
+
+Ns 255
+
+map_Bump Body1_nmap.png
+
+map_Ns Body1_spec.png
+
