@@ -1,0 +1,1880 @@
+newmtl Frame1Mtl
+Material Color
+Ka 0.215764 0.133209 0.0717615
+Kd 0.215764 0.133209 0.0717615
+Ks 0.143843 0.0888057 0.047841 
+
+d 1
+
+Ns 255
+
+map_Ka Stand1_diff.png
+map_Kd Stand1_diff.png
+map_d Stand1_diff.png
+
+map_Bump Stand1_nmap.png
+
+map_Ns Stand1_spec.png
+
+newmtl Post1Mtl
+Material Color
+Ka 0.0657539 0.0384727 0.0302565
+Kd 0.0657539 0.0384727 0.0302565
+Ks 0.00361002 0.00211223 0.00166114 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Wall2Mtl
+Material Color
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0 
+
+d 0.152941
+
+Ns 0
+
+map_Ka Wall2_diff.png
+map_Kd Wall2_diff.png
+map_d Wall2_diff.png
+
+newmtl Carpetlight2Mtl
+Material Color
+Ka 1 0.932277 0.45908
+Kd 1 0.932277 0.45908
+Ks 0.027451 0.0255919 0.0126022 
+
+d 0.101961
+
+Ns 0
+
+map_Ka Carpetlight2_diff.png
+map_Kd Carpetlight2_diff.png
+map_d Carpetlight2_diff.png
+
+newmtl Wallstrip2Mtl
+Material Color
+Ka 0.180144 0.121986 0.111299
+Kd 0.180144 0.121986 0.111299
+Ks 0.0134225 0.00908913 0.0082929 
+
+d 1
+
+Ns 0
+
+map_Ka Wallstrip2_diff.png
+map_Kd Wallstrip2_diff.png
+map_d Wallstrip2_diff.png
+
+map_Bump Wallstrip2_nmap.png
+
+map_Ns Wallstrip2_spec.png
+
+newmtl Carpetlight1Mtl
+Material Color
+Ka 0.103634 0.0545923 0.0638149
+Kd 0.103634 0.0545923 0.0638149
+Ks 0.00284486 0.00149861 0.00175178 
+
+d 1
+
+Ns 0
+
+map_Ka Carpetlight1_diff.png
+map_Kd Carpetlight1_diff.png
+map_d Carpetlight1_diff.png
+
+map_Bump Carpetlight1_nmap.png
+
+map_Ns Carpetlight1_spec.png
+
+newmtl Metal1Mtl
+Material Color
+Ka 0.215764 0.212044 0.201096
+Kd 0.215764 0.212044 0.201096
+Ks 0.143843 0.141363 0.134064 
+
+d 1
+
+Ns 255
+
+map_Ka Stand1_diff.png
+map_Kd Stand1_diff.png
+map_d Stand1_diff.png
+
+map_Bump Stand1_nmap.png
+
+map_Ns Stand1_spec.png
+
+newmtl Books1Mtl
+Material Color
+Ka 0.00604059 0.0033027 0.00226295
+Kd 0.00604059 0.0033027 0.00226295
+Ks 0.000236886 0.000129518 8.87433e-05 
+
+d 1
+
+Ns 0
+
+map_Ka Books1_diff.png
+map_Kd Books1_diff.png
+map_d Books1_diff.png
+
+map_Bump Books1_nmap.png
+
+map_Ns Books1_spec.png
+
+newmtl Neon12Mtl
+Material Color
+Ka 0.554227 0.363604 0.271577
+Kd 0.554227 0.363604 0.271577
+Ks 0.0499891 0.0327956 0.0244952 
+
+d 0.396078
+
+Ns 0
+
+newmtl Wallstrip1Mtl
+Material Color
+Ka 0.12753 0.0846415 0.0780566
+Kd 0.12753 0.0846415 0.0780566
+Ks 0.00700164 0.00464699 0.00428546 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Wallstrip3Mtl
+Material Color
+Ka 0.180144 0.121986 0.111299
+Kd 0.180144 0.121986 0.111299
+Ks 0.00989028 0.00669726 0.00611056 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Top1Mtl
+Material Color
+Ka 0.0356144 0.0242229 0.022013
+Kd 0.0356144 0.0242229 0.022013
+Ks 0.0019553 0.00132989 0.00120856 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Stand1Mtl
+Material Color
+Ka 0.0414519 0.0231036 0.0151752
+Kd 0.0414519 0.0231036 0.0151752
+Ks 0.0276346 0.0154024 0.0101168 
+
+d 1
+
+Ns 255
+
+map_Ka Stand1_diff.png
+map_Kd Stand1_diff.png
+map_d Stand1_diff.png
+
+map_Bump Stand1_nmap.png
+
+map_Ns Stand1_spec.png
+
+newmtl Wall1Mtl
+Material Color
+Ka 0.154152 0.0581872 0.0581872
+Kd 0.154152 0.0581872 0.0581872
+Ks 0.00846326 0.00319459 0.00319459 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Knob3Mtl
+Material Color
+Ka 0.529523 0.493616 0.436813
+Kd 0.529523 0.493616 0.436813
+Ks 0.353016 0.329077 0.291209 
+
+d 1
+
+Ns 255
+
+map_Ka Stand1_diff.png
+map_Kd Stand1_diff.png
+map_d Stand1_diff.png
+
+map_Bump Stand1_nmap.png
+
+map_Ns Stand1_spec.png
+
+newmtl Lightfixture1Mtl
+Material Color
+Ka 0.0869013 0.0477758 0.0302565
+Kd 0.0869013 0.0477758 0.0302565
+Ks 0.0579342 0.0318505 0.020171 
+
+d 1
+
+Ns 255
+
+map_Ka Stand1_diff.png
+map_Kd Stand1_diff.png
+map_d Stand1_diff.png
+
+map_Bump Stand1_nmap.png
+
+map_Ns Stand1_spec.png
+
+newmtl Boards6Mtl
+Material Color
+Ka 1 0.88318 0.523443
+Kd 1 0.88318 0.523443
+Ks 1 0.88318 0.523443 
+
+d 0.603922
+
+Ns 0
+
+map_Ka Neon20_diff.png
+map_Kd Neon20_diff.png
+map_d Neon20_diff.png
+
+map_Bump Neon20_nmap.png
+
+map_Ns Neon20_spec.png
+
+newmtl Neon1Mtl
+Material Color
+Ka 0.554227 0.363604 0.271577
+Kd 0.554227 0.363604 0.271577
+Ks 0.0499891 0.0327956 0.0244952 
+
+d 0.0313726
+
+Ns 0
+
+newmtl Books4Mtl
+Material Color
+Ka 0.0253713 0.0160677 0.0143105
+Kd 0.0253713 0.0160677 0.0143105
+Ks 0.000994952 0.000630106 0.000561197 
+
+d 0.101961
+
+Ns 0
+
+map_Ka Books4_diff.png
+map_Kd Books4_diff.png
+map_d Books4_diff.png
+
+newmtl Base79Mtl
+Material Color
+Ka 0.139022 0.0938759 0.0619075
+Kd 0.139022 0.0938759 0.0619075
+Ks 0.00763261 0.00515397 0.00339884 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Base31Mtl
+Material Color
+Ka 0.0414519 0.0231036 0.0151752
+Kd 0.0414519 0.0231036 0.0151752
+Ks 0.00227579 0.00126843 0.00083315 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Trunk1Mtl
+Material Color
+Ka 0.0445526 0.0277553 0.0199178
+Kd 0.0445526 0.0277553 0.0199178
+Ks 0.00244603 0.00152382 0.00109353 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Canvas1Mtl
+Material Color
+Ka 0.701169 0.722672 0.737205
+Kd 0.701169 0.722672 0.737205
+Ks 0.0302465 0.0311741 0.031801 
+
+d 1
+
+Ns 0
+
+map_Ka Pot1_diff.png
+map_Kd Pot1_diff.png
+map_d Pot1_diff.png
+
+map_Bump Pot1_nmap.png
+
+map_Ns Pot1_spec.png
+
+newmtl Plant1Mtl
+Material Color
+Ka 0.0118813 0.0315514 0.00658496
+Kd 0.0118813 0.0315514 0.00658496
+Ks 0.000326154 0.000866117 0.000180764 
+
+d 1
+
+Ns 0
+
+map_Ka Plant1_diff.png
+map_Kd Plant1_diff.png
+map_d Plant1_diff.png
+
+map_Bump Plant1_nmap.png
+
+map_Ns Plant1_spec.png
+
+newmtl Dirt1Mtl
+Material Color
+Ka 0.0915184 0.0511221 0.0328759
+Kd 0.0915184 0.0511221 0.0328759
+Ks 0.00251227 0.00140335 0.000902476 
+
+d 1
+
+Ns 0
+
+map_Ka Dirt1_diff.png
+map_Kd Dirt1_diff.png
+map_d Dirt1_diff.png
+
+map_Bump Dirt1_nmap.png
+
+map_Ns Dirt1_spec.png
+
+newmtl Tablecloth1Mtl
+Material Color
+Ka 0.0657539 0.0253713 0.0342302
+Kd 0.0657539 0.0253713 0.0342302
+Ks 0.00257858 0.000994952 0.00134236 
+
+d 1
+
+Ns 0
+
+map_Ka Books1_diff.png
+map_Kd Books1_diff.png
+map_d Books1_diff.png
+
+map_Bump Books1_nmap.png
+
+map_Ns Books1_spec.png
+
+newmtl Pot16Mtl
+Material Color
+Ka 0.227137 0.0759261 0.0759261
+Kd 0.227137 0.0759261 0.0759261
+Ks 0.00979805 0.00327524 0.00327524 
+
+d 1
+
+Ns 0
+
+map_Ka Pot1_diff.png
+map_Kd Pot1_diff.png
+map_d Pot1_diff.png
+
+map_Bump Pot1_nmap.png
+
+map_Ns Pot1_spec.png
+
+newmtl Pot1Mtl
+Material Color
+Ka 0.124741 0.0414519 0.0414519
+Kd 0.124741 0.0414519 0.0414519
+Ks 0.00538098 0.00178812 0.00178812 
+
+d 1
+
+Ns 0
+
+map_Ka Pot1_diff.png
+map_Kd Pot1_diff.png
+map_d Pot1_diff.png
+
+map_Bump Pot1_nmap.png
+
+map_Ns Pot1_spec.png
+
+newmtl Floor1Mtl
+Material Color
+Ka 0.113921 0.0846415 0.0802193
+Kd 0.113921 0.0846415 0.0802193
+Ks 0.00848823 0.00630662 0.00597712 
+
+d 1
+
+Ns 0
+
+map_Ka Wallstrip2_diff.png
+map_Kd Wallstrip2_diff.png
+map_d Wallstrip2_diff.png
+
+map_Bump Wallstrip2_nmap.png
+
+map_Ns Wallstrip2_spec.png
+
+newmtl Door1Mtl
+Material Color
+Ka 0.124741 0.0717615 0.0511221
+Kd 0.124741 0.0717615 0.0511221
+Ks 0.00684852 0.00393984 0.0028067 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Base2Mtl
+Material Color
+Ka 0.0511221 0.0342302 0.0315514
+Kd 0.0511221 0.0342302 0.0315514
+Ks 0.0028067 0.00187931 0.00173223 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Knob1Mtl
+Material Color
+Ka 0.373615 0.21952 0.14198
+Kd 0.373615 0.21952 0.14198
+Ks 0.249077 0.146346 0.0946535 
+
+d 1
+
+Ns 255
+
+map_Ka Stand1_diff.png
+map_Kd Stand1_diff.png
+map_d Stand1_diff.png
+
+map_Bump Stand1_nmap.png
+
+map_Ns Stand1_spec.png
+
+newmtl Detail1Mtl
+Material Color
+Ka 0.0759261 0.042987 0.0315514
+Kd 0.0759261 0.042987 0.0315514
+Ks 0.00416849 0.00236007 0.00173223 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Detail2Mtl
+Material Color
+Ka 0.139022 0.0759261 0.0563741
+Kd 0.139022 0.0759261 0.0563741
+Ks 0.00763261 0.00416849 0.00309505 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Wallstrip13Mtl
+Material Color
+Ka 0.0581872 0.042987 0.0399472
+Kd 0.0581872 0.042987 0.0399472
+Ks 0.00319459 0.00236007 0.00219318 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Detail3Mtl
+Material Color
+Ka 0.190463 0.113921 0.0738278
+Kd 0.190463 0.113921 0.0738278
+Ks 0.126975 0.0759473 0.0492185 
+
+d 1
+
+Ns 255
+
+map_Ka Stand1_diff.png
+map_Kd Stand1_diff.png
+map_d Stand1_diff.png
+
+map_Bump Stand1_nmap.png
+
+map_Ns Stand1_spec.png
+
+newmtl Signphysical1Mtl
+Material Color
+Ka 0.176774 0.103634 0.0717615
+Kd 0.176774 0.103634 0.0717615
+Ks 0.00970526 0.00568972 0.00393984 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Neon16Mtl
+Material Color
+Ka 0.554227 0.363604 0.271577
+Kd 0.554227 0.363604 0.271577
+Ks 0.0499891 0.0327956 0.0244952 
+
+d 0.388235
+
+Ns 0
+
+newmtl Hidden1Mtl
+Material Color
+Ka 0.00258583 0.00258583 0.00258583
+Kd 0.00258583 0.00258583 0.00258583
+Ks 0.000233231 0.000233231 0.000233231 
+
+d 1
+
+Ns 0
+
+newmtl Regalpillowbent1Mtl
+Material Color
+Ka 0.348865 0.0759261 0.121986
+Kd 0.348865 0.0759261 0.121986
+Ks 0.013681 0.0029775 0.00478375 
+
+d 1
+
+Ns 0
+
+map_Ka Books1_diff.png
+map_Kd Books1_diff.png
+map_d Books1_diff.png
+
+map_Bump Books1_nmap.png
+
+map_Ns Books1_spec.png
+
+newmtl Light1Mtl
+Material Color
+Ka 0.0160677 0.0160677 0.0160677
+Kd 0.0160677 0.0160677 0.0160677
+Ks 0.00636407 0.00636407 0.00636407 
+
+d 0.803922
+
+Ns 0
+
+newmtl Base1Mtl
+Material Color
+Ka 0.0545923 0.0563741 0.0738278
+Kd 0.0545923 0.0563741 0.0738278
+Ks 0.0107044 0.0110537 0.014476 
+
+d 1
+
+Ns 255
+
+map_Bump Base1_nmap.png
+
+map_Ns Base1_spec.png
+
+newmtl Pillar1Mtl
+Material Color
+Ka 0.108711 0.0738278 0.0677246
+Kd 0.108711 0.0738278 0.0677246
+Ks 0.00596846 0.00405329 0.00371821 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Wallalt2Mtl
+Material Color
+Ka 0.136099 0.0915184 0.0846415
+Kd 0.136099 0.0915184 0.0846415
+Ks 0.00747208 0.00502454 0.00464699 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Cover12Mtl
+Material Color
+Ka 0.133209 0.0846415 0.0600316
+Kd 0.133209 0.0846415 0.0600316
+Ks 0.00574625 0.0036512 0.0025896 
+
+d 1
+
+Ns 0
+
+map_Ka Pot1_diff.png
+map_Kd Pot1_diff.png
+map_d Pot1_diff.png
+
+map_Bump Pot1_nmap.png
+
+map_Ns Pot1_spec.png
+
+newmtl Books2Mtl
+Material Color
+Ka 0.38891 0.38891 0.38891
+Kd 0.38891 0.38891 0.38891
+Ks 0.0152514 0.0152514 0.0152514 
+
+d 0.501961
+
+Ns 0
+
+map_Ka Books2_diff.png
+map_Kd Books2_diff.png
+map_d Books2_diff.png
+
+newmtl Glass3Mtl
+Material Color
+Ka 0.415148 0.344026 0.275833
+Kd 0.415148 0.344026 0.275833
+Ks 0.0602372 0.0499175 0.0400228 
+
+d 0.152941
+
+Ns 0
+
+map_Ka Glass3_diff.png
+map_Kd Glass3_diff.png
+map_d Glass3_diff.png
+
+map_Bump Glass3_nmap.png
+
+map_Ns Glass3_spec.png
+
+newmtl Books3Mtl
+Material Color
+Ka 0.339223 0.339223 0.339223
+Kd 0.339223 0.339223 0.339223
+Ks 0.0133029 0.0133029 0.0133029 
+
+d 0.701961
+
+Ns 0
+
+map_Ka Books3_diff.png
+map_Kd Books3_diff.png
+map_d Books3_diff.png
+
+newmtl Wallalt5Mtl
+Material Color
+Ka 0.101145 0.0677246 0.0619075
+Kd 0.101145 0.0677246 0.0619075
+Ks 0.00555307 0.00371821 0.00339884 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Cover11Mtl
+Material Color
+Ka 0.0600316 0.133209 0.0619075
+Kd 0.0600316 0.133209 0.0619075
+Ks 0.0025896 0.00574625 0.00267052 
+
+d 1
+
+Ns 0
+
+map_Ka Pot1_diff.png
+map_Kd Pot1_diff.png
+map_d Pot1_diff.png
+
+map_Bump Pot1_nmap.png
+
+map_Ns Pot1_spec.png
+
+newmtl Paper1Mtl
+Material Color
+Ka 0.523443 0.481952 0.420508
+Kd 0.523443 0.481952 0.420508
+Ks 0.0225799 0.0207901 0.0181396 
+
+d 1
+
+Ns 0
+
+map_Ka Pot1_diff.png
+map_Kd Pot1_diff.png
+map_d Pot1_diff.png
+
+map_Bump Pot1_nmap.png
+
+map_Ns Pot1_spec.png
+
+newmtl Glass1Mtl
+Material Color
+Ka 0.415148 0.344026 0.275833
+Kd 0.415148 0.344026 0.275833
+Ks 0.0602372 0.0499175 0.0400228 
+
+d 0.152941
+
+Ns 0
+
+map_Ka Glass1_diff.png
+map_Kd Glass1_diff.png
+map_d Glass1_diff.png
+
+map_Bump Glass1_nmap.png
+
+map_Ns Glass1_spec.png
+
+newmtl Wood1Mtl
+Material Color
+Ka 0.147998 0.0986892 0.0915184
+Kd 0.147998 0.0986892 0.0915184
+Ks 0.00812538 0.00541823 0.00502454 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Neon10Mtl
+Material Color
+Ka 0.554227 0.363604 0.271577
+Kd 0.554227 0.363604 0.271577
+Ks 0.0499891 0.0327956 0.0244952 
+
+d 0.0196078
+
+Ns 0
+
+newmtl Neon3Mtl
+Material Color
+Ka 0.554227 0.363604 0.271577
+Kd 0.554227 0.363604 0.271577
+Ks 0.0499891 0.0327956 0.0244952 
+
+d 0.196078
+
+Ns 0
+
+newmtl Neon4Mtl
+Material Color
+Ka 0.554227 0.363604 0.271577
+Kd 0.554227 0.363604 0.271577
+Ks 0.0499891 0.0327956 0.0244952 
+
+d 0.901961
+
+Ns 0
+
+newmtl Cushion11Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.0392157 0.0392157 0.0392157 
+
+d 0.501961
+
+Ns 0
+
+map_Ka Cushion11_diff.png
+map_Kd Cushion11_diff.png
+map_d Cushion11_diff.png
+
+newmtl Cover13Mtl
+Material Color
+Ka 0.0938759 0.133209 0.0600316
+Kd 0.0938759 0.133209 0.0600316
+Ks 0.00404955 0.00574625 0.0025896 
+
+d 1
+
+Ns 0
+
+map_Ka Pot1_diff.png
+map_Kd Pot1_diff.png
+map_d Pot1_diff.png
+
+map_Bump Pot1_nmap.png
+
+map_Ns Pot1_spec.png
+
+newmtl Cover14Mtl
+Material Color
+Ka 0.0915184 0.133209 0.0600316
+Kd 0.0915184 0.133209 0.0600316
+Ks 0.00394785 0.00574625 0.0025896 
+
+d 1
+
+Ns 0
+
+map_Ka Pot1_diff.png
+map_Kd Pot1_diff.png
+map_d Pot1_diff.png
+
+map_Bump Pot1_nmap.png
+
+map_Ns Pot1_spec.png
+
+newmtl Wood4Mtl
+Material Color
+Ka 0.0657539 0.0328759 0.0209511
+Kd 0.0657539 0.0328759 0.0209511
+Ks 0.00361002 0.00180495 0.00115026 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Main12Mtl
+Material Color
+Ka 0.348865 0.238828 0.215764
+Kd 0.348865 0.238828 0.215764
+Ks 0.0191534 0.0131121 0.0118459 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Cushion1Mtl
+Material Color
+Ka 0.234895 0.0869013 0.113921
+Kd 0.234895 0.0869013 0.113921
+Ks 0.00921158 0.00340789 0.00446749 
+
+d 1
+
+Ns 0
+
+map_Ka Books1_diff.png
+map_Kd Books1_diff.png
+map_d Books1_diff.png
+
+map_Bump Books1_nmap.png
+
+map_Ns Books1_spec.png
+
+newmtl Cushion2Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.0392157 0.0392157 0.0392157 
+
+d 0.0509804
+
+Ns 0
+
+map_Ka Wall2_diff.png
+map_Kd Wall2_diff.png
+map_d Wall2_diff.png
+
+newmtl Base73Mtl
+Material Color
+Ka 0.0302565 0.0151752 0.00969633
+Kd 0.0302565 0.0151752 0.00969633
+Ks 0.00166114 0.00083315 0.000532347 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Cushion4Mtl
+Material Color
+Ka 0.180144 0.0657539 0.0869013
+Kd 0.180144 0.0657539 0.0869013
+Ks 0.00706448 0.00257858 0.00340789 
+
+d 1
+
+Ns 0
+
+map_Ka Books1_diff.png
+map_Kd Books1_diff.png
+map_d Books1_diff.png
+
+map_Bump Books1_nmap.png
+
+map_Ns Books1_spec.png
+
+newmtl Sign1Mtl
+Material Color
+Ka 0.297653 0.271577 0.25084
+Kd 0.297653 0.271577 0.25084
+Ks 0.035018 0.0319503 0.0295106 
+
+d 1
+
+Ns 0
+
+map_Ka Sign1_diff.png
+map_Kd Sign1_diff.png
+map_d Sign1_diff.png
+
+map_Bump Sign1_nmap.png
+
+map_Ns Sign1_spec.png
+
+newmtl Base85Mtl
+Material Color
+Ka 0.163641 0.147998 0.136099
+Kd 0.163641 0.147998 0.136099
+Ks 0.0192518 0.0174115 0.0160116 
+
+d 1
+
+Ns 0
+
+map_Ka Sign1_diff.png
+map_Kd Sign1_diff.png
+map_d Sign1_diff.png
+
+map_Bump Sign1_nmap.png
+
+map_Ns Sign1_spec.png
+
+newmtl Carpet1Mtl
+Material Color
+Ka 0.0759261 0.0289912 0.0289912
+Kd 0.0759261 0.0289912 0.0289912
+Ks 0.00208425 0.000795837 0.000795837 
+
+d 1
+
+Ns 0
+
+map_Ka Carpetlight1_diff.png
+map_Kd Carpetlight1_diff.png
+map_d Carpetlight1_diff.png
+
+map_Bump Carpetlight1_nmap.png
+
+map_Ns Carpetlight1_spec.png
+
+newmtl Base148Mtl
+Material Color
+Ka 0.0846415 0.0545923 0.0511221
+Kd 0.0846415 0.0545923 0.0511221
+Ks 0.00464699 0.00299722 0.0028067 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Neon8Mtl
+Material Color
+Ka 0.554227 0.363604 0.271577
+Kd 0.554227 0.363604 0.271577
+Ks 0.0499891 0.0327956 0.0244952 
+
+d 0.0862745
+
+Ns 0
+
+newmtl Neon9Mtl
+Material Color
+Ka 0.554227 0.363604 0.271577
+Kd 0.554227 0.363604 0.271577
+Ks 0.0499891 0.0327956 0.0244952 
+
+d 0.0588235
+
+Ns 0
+
+newmtl Neon11Mtl
+Material Color
+Ka 0.554227 0.363604 0.271577
+Kd 0.554227 0.363604 0.271577
+Ks 0.0499891 0.0327956 0.0244952 
+
+d 0.584314
+
+Ns 0
+
+newmtl Neon13Mtl
+Material Color
+Ka 0.554227 0.363604 0.271577
+Kd 0.554227 0.363604 0.271577
+Ks 0.0499891 0.0327956 0.0244952 
+
+d 0.443137
+
+Ns 0
+
+newmtl Neon14Mtl
+Material Color
+Ka 0.554227 0.363604 0.271577
+Kd 0.554227 0.363604 0.271577
+Ks 0.0499891 0.0327956 0.0244952 
+
+d 0.027451
+
+Ns 0
+
+newmtl Neon15Mtl
+Material Color
+Ka 0.554227 0.363604 0.271577
+Kd 0.554227 0.363604 0.271577
+Ks 0.0499891 0.0327956 0.0244952 
+
+d 0.0156863
+
+Ns 0
+
+newmtl Neon18Mtl
+Material Color
+Ka 0.554227 0.363604 0.271577
+Kd 0.554227 0.363604 0.271577
+Ks 0.0499891 0.0327956 0.0244952 
+
+d 0.00784314
+
+Ns 0
+
+newmtl Part1Mtl
+Material Color
+Ka 0.124741 0.0846415 0.0638149
+Kd 0.124741 0.0846415 0.0638149
+Ks 0.00929442 0.00630662 0.00475483 
+
+d 1
+
+Ns 0
+
+map_Ka Wallstrip2_diff.png
+map_Kd Wallstrip2_diff.png
+map_d Wallstrip2_diff.png
+
+map_Bump Wallstrip2_nmap.png
+
+map_Ns Wallstrip2_spec.png
+
+newmtl Neon25Mtl
+Material Color
+Ka 0.554227 0.363604 0.271577
+Kd 0.554227 0.363604 0.271577
+Ks 0.0499891 0.0327956 0.0244952 
+
+d 0.184314
+
+Ns 0
+
+newmtl Part5Mtl
+Material Color
+Ka 0.0986892 0.0657539 0.0494335
+Kd 0.0986892 0.0657539 0.0494335
+Ks 0.00735331 0.00489931 0.00368328 
+
+d 1
+
+Ns 0
+
+map_Ka Wallstrip2_diff.png
+map_Kd Wallstrip2_diff.png
+map_d Wallstrip2_diff.png
+
+map_Bump Wallstrip2_nmap.png
+
+map_Ns Wallstrip2_spec.png
+
+newmtl Part7Mtl
+Material Color
+Ka 0.0677246 0.0461488 0.0342302
+Kd 0.0677246 0.0461488 0.0342302
+Ks 0.00371821 0.00253366 0.00187931 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Wood32Mtl
+Material Color
+Ka 0.230998 0.157281 0.14198
+Kd 0.230998 0.157281 0.14198
+Ks 0.0126823 0.00863502 0.007795 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Ceilingdetail1Mtl
+Material Color
+Ka 0.147998 0.101145 0.0915184
+Kd 0.147998 0.101145 0.0915184
+Ks 0.00812538 0.00555307 0.00502454 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Ceilingdetail6Mtl
+Material Color
+Ka 0.147998 0.101145 0.0915184
+Kd 0.147998 0.101145 0.0915184
+Ks 0.0110273 0.00753631 0.00681902 
+
+d 1
+
+Ns 0
+
+map_Ka Wallstrip2_diff.png
+map_Kd Wallstrip2_diff.png
+map_d Wallstrip2_diff.png
+
+map_Bump Wallstrip2_nmap.png
+
+map_Ns Wallstrip2_spec.png
+
+newmtl Lightfixture20Mtl
+Material Color
+Ka 0.183549 0.101145 0.0657539
+Kd 0.183549 0.101145 0.0657539
+Ks 0.0100772 0.00555307 0.00361002 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Neon20Mtl
+Material Color
+Ka 0.598942 0.529523 0.311181
+Kd 0.598942 0.529523 0.311181
+Ks 0.598942 0.529523 0.311181 
+
+d 0.952941
+
+Ns 0
+
+map_Ka Neon20_diff.png
+map_Kd Neon20_diff.png
+map_d Neon20_diff.png
+
+map_Bump Neon20_nmap.png
+
+map_Ns Neon20_spec.png
+
+newmtl Cover15Mtl
+Material Color
+Ka 0.119264 0.133209 0.0600316
+Kd 0.119264 0.133209 0.0600316
+Ks 0.00514472 0.00574625 0.0025896 
+
+d 1
+
+Ns 0
+
+map_Ka Pot1_diff.png
+map_Kd Pot1_diff.png
+map_d Pot1_diff.png
+
+map_Bump Pot1_nmap.png
+
+map_Ns Pot1_spec.png
+
+newmtl Cover16Mtl
+Material Color
+Ka 0.0600316 0.133209 0.0759261
+Kd 0.0600316 0.133209 0.0759261
+Ks 0.0025896 0.00574625 0.00327524 
+
+d 1
+
+Ns 0
+
+map_Ka Pot1_diff.png
+map_Kd Pot1_diff.png
+map_d Pot1_diff.png
+
+map_Bump Pot1_nmap.png
+
+map_Ns Pot1_spec.png
+
+newmtl Seat1Mtl
+Material Color
+Ka 0.103634 0.0677246 0.0511221
+Kd 0.103634 0.0677246 0.0511221
+Ks 0.00568972 0.00371821 0.0028067 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Wood15Mtl
+Material Color
+Ka 0.0494335 0.0328759 0.0242229
+Kd 0.0494335 0.0328759 0.0242229
+Ks 0.00271399 0.00180495 0.00132989 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Base109Mtl
+Material Color
+Ka 0.0461488 0.0302565 0.022013
+Kd 0.0461488 0.0302565 0.022013
+Ks 0.00253366 0.00166114 0.00120856 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Base117Mtl
+Material Color
+Ka 0.0328759 0.022013 0.0160677
+Kd 0.0328759 0.022013 0.0160677
+Ks 0.00180495 0.00120856 0.000882148 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Top3Mtl
+Material Color
+Ka 0.271577 0.215764 0.136099
+Kd 0.271577 0.215764 0.136099
+Ks 0.237497 0.188688 0.11902 
+
+d 1
+
+Ns 0
+
+map_Ka Top3_diff.png
+map_Kd Top3_diff.png
+map_d Top3_diff.png
+
+map_Bump Top3_nmap.png
+
+map_Ns Top3_spec.png
+
+newmtl Neon24Mtl
+Material Color
+Ka 0.554227 0.363604 0.271577
+Kd 0.554227 0.363604 0.271577
+Ks 0.0499891 0.0327956 0.0244952 
+
+d 0.894118
+
+Ns 0
+
+newmtl Cover17Mtl
+Material Color
+Ka 0.133209 0.121986 0.0600316
+Kd 0.133209 0.121986 0.0600316
+Ks 0.00574625 0.00526213 0.0025896 
+
+d 1
+
+Ns 0
+
+map_Ka Pot1_diff.png
+map_Kd Pot1_diff.png
+map_d Pot1_diff.png
+
+map_Bump Pot1_nmap.png
+
+map_Ns Pot1_spec.png
+
+newmtl Cover18Mtl
+Material Color
+Ka 0.0600316 0.133209 0.101145
+Kd 0.0600316 0.133209 0.101145
+Ks 0.0025896 0.00574625 0.00436312 
+
+d 1
+
+Ns 0
+
+map_Ka Pot1_diff.png
+map_Kd Pot1_diff.png
+map_d Pot1_diff.png
+
+map_Bump Pot1_nmap.png
+
+map_Ns Pot1_spec.png
+
+newmtl Base137Mtl
+Material Color
+Ka 0.042987 0.0277553 0.0151752
+Kd 0.042987 0.0277553 0.0151752
+Ks 0.00236007 0.00152382 0.00083315 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Extra1Mtl
+Material Color
+Ka 0.173439 0.144972 0.263175
+Kd 0.173439 0.144972 0.263175
+Ks 0.0251657 0.0210352 0.0381861 
+
+d 1
+
+Ns 0
+
+map_Ka Glass3_diff.png
+map_Kd Glass3_diff.png
+map_d Glass3_diff.png
+
+map_Bump Glass3_nmap.png
+
+map_Ns Glass3_spec.png
+
+newmtl Wood25Mtl
+Material Color
+Ka 0.0802193 0.0638149 0.0277553
+Kd 0.0802193 0.0638149 0.0277553
+Ks 0.0044042 0.00350356 0.00152382 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Base138Mtl
+Material Color
+Ka 0.163641 0.133209 0.0824142
+Kd 0.163641 0.133209 0.0824142
+Ks 0.109094 0.0888057 0.0549428 
+
+d 1
+
+Ns 255
+
+map_Ka Stand1_diff.png
+map_Kd Stand1_diff.png
+map_d Stand1_diff.png
+
+map_Bump Stand1_nmap.png
+
+map_Ns Stand1_spec.png
+
+newmtl Paper9Mtl
+Material Color
+Ka 0.701169 0.505432 0.320382
+Kd 0.701169 0.505432 0.320382
+Ks 0.0274968 0.0198209 0.012564 
+
+d 1
+
+Ns 0
+
+map_Ka Books1_diff.png
+map_Kd Books1_diff.png
+map_d Books1_diff.png
+
+map_Bump Books1_nmap.png
+
+map_Ns Books1_spec.png
+
+newmtl Metal2Mtl
+Material Color
+Ka 0.022013 0.0199178 0.0169881
+Kd 0.022013 0.0199178 0.0169881
+Ks 0.0146753 0.0132786 0.0113254 
+
+d 1
+
+Ns 255
+
+map_Ka Stand1_diff.png
+map_Kd Stand1_diff.png
+map_d Stand1_diff.png
+
+map_Bump Stand1_nmap.png
+
+map_Ns Stand1_spec.png
+
+newmtl Black1Mtl
+Material Color
+Ka 0.0242229 0.022013 0.0199178
+Kd 0.0242229 0.022013 0.0199178
+Ks 0.000949919 0.000863255 0.000781092 
+
+d 1
+
+Ns 0
+
+map_Ka Books1_diff.png
+map_Kd Books1_diff.png
+map_d Books1_diff.png
+
+map_Bump Books1_nmap.png
+
+map_Ns Books1_spec.png
+
+newmtl Keys1Mtl
+Material Color
+Ka 0.0869013 0.0846415 0.0824142
+Kd 0.0869013 0.0846415 0.0824142
+Ks 0.0579342 0.0564277 0.0549428 
+
+d 1
+
+Ns 255
+
+map_Ka Stand1_diff.png
+map_Kd Stand1_diff.png
+map_d Stand1_diff.png
+
+map_Bump Stand1_nmap.png
+
+map_Ns Stand1_spec.png
+
+newmtl Trunk16Mtl
+Material Color
+Ka 0.151058 0.0962661 0.0677246
+Kd 0.151058 0.0962661 0.0677246
+Ks 0.00829338 0.0052852 0.00371821 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Plant16Mtl
+Material Color
+Ka 0.0494335 0.113921 0.0600316
+Kd 0.0494335 0.113921 0.0600316
+Ks 0.00193857 0.00446749 0.00235418 
+
+d 1
+
+Ns 0
+
+map_Ka Books1_diff.png
+map_Kd Books1_diff.png
+map_d Books1_diff.png
+
+map_Bump Books1_nmap.png
+
+map_Ns Books1_spec.png
+
+newmtl Tassle1Mtl
+Material Color
+Ka 0.0986892 0.0619075 0.018913
+Kd 0.0986892 0.0619075 0.018913
+Ks 0.00387016 0.00242774 0.000741686 
+
+d 1
+
+Ns 0
+
+map_Ka Books1_diff.png
+map_Kd Books1_diff.png
+map_d Books1_diff.png
+
+map_Bump Books1_nmap.png
+
+map_Ns Books1_spec.png
+
+newmtl Dirt16Mtl
+Material Color
+Ka 0.0915184 0.0511221 0.0328759
+Kd 0.0915184 0.0511221 0.0328759
+Ks 0.00358896 0.00200479 0.00128925 
+
+d 1
+
+Ns 0
+
+map_Ka Books1_diff.png
+map_Kd Books1_diff.png
+map_d Books1_diff.png
+
+map_Bump Books1_nmap.png
+
+map_Ns Books1_spec.png
+
+newmtl Curtain1Mtl
+Material Color
+Ka 0.12753 0.0511221 0.0677246
+Kd 0.12753 0.0511221 0.0677246
+Ks 0.00500117 0.00200479 0.00265587 
+
+d 1
+
+Ns 0
+
+map_Ka Books1_diff.png
+map_Kd Books1_diff.png
+map_d Books1_diff.png
+
+map_Bump Books1_nmap.png
+
+map_Ns Books1_spec.png
+
+newmtl Knobs7Mtl
+Material Color
+Ka 0.499505 0.45908 0.409826
+Kd 0.499505 0.45908 0.409826
+Ks 0.333004 0.306053 0.273217 
+
+d 1
+
+Ns 255
+
+map_Ka Stand1_diff.png
+map_Kd Stand1_diff.png
+map_d Stand1_diff.png
+
+map_Bump Stand1_nmap.png
+
+map_Ns Stand1_spec.png
+
+newmtl Wood33Mtl
+Material Color
+Ka 0.144972 0.0986892 0.0891935
+Kd 0.144972 0.0986892 0.0891935
+Ks 0.00795926 0.00541823 0.0048969 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Wood34Mtl
+Material Color
+Ka 0.0399472 0.0253713 0.0242229
+Kd 0.0399472 0.0253713 0.0242229
+Ks 0.00219318 0.00139293 0.00132989 
+
+d 1
+
+Ns 0
+
+map_Ka Post1_diff.png
+map_Kd Post1_diff.png
+map_d Post1_diff.png
+
+map_Bump Post1_nmap.png
+
+map_Ns Post1_spec.png
+
+newmtl Wheels1Mtl
+Material Color
+Ka 0.124741 0.0891935 0.0619075
+Kd 0.124741 0.0891935 0.0619075
+Ks 0.0831606 0.0594623 0.0412717 
+
+d 1
+
+Ns 255
+
+map_Ka Stand1_diff.png
+map_Kd Stand1_diff.png
+map_d Stand1_diff.png
+
+map_Bump Stand1_nmap.png
+
+map_Ns Stand1_spec.png
+
+newmtl Cushion44Mtl
+Material Color
+Ka 0.0619075 0.0242229 0.00969633
+Kd 0.0619075 0.0242229 0.00969633
+Ks 0.00242774 0.000949919 0.000380248 
+
+d 1
+
+Ns 0
+
+map_Ka Books1_diff.png
+map_Kd Books1_diff.png
+map_d Books1_diff.png
+
+map_Bump Books1_nmap.png
+
+map_Ns Books1_spec.png
+
+newmtl Cushion45Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.0392157 0.0392157 0.0392157 
+
+d 0.701961
+
+Ns 0
+
+map_Ka Cushion11_diff.png
+map_Kd Cushion11_diff.png
+map_d Cushion11_diff.png
+
