@@ -746,8 +746,8 @@ namespace Valve.VR.InteractionSystem
 					allowTeleportWhileAttached = pointerHand.currentAttachedObject.GetComponent<AllowTeleportWhileAttachedToHand>();
 				}
 
-				//Keep track of any existing hovering interactable on the hand
-				originalHoverLockState = pointerHand.hoverLocked;
+				//!Keep track of any existing hovering interactable on the hand
+				//!originalHoverLockState = pointerHand.hoverLocked;
 				originalHoveringInteractable = pointerHand.hoveringInteractable;
 
 				if ( ShouldOverrideHoverLock() )
