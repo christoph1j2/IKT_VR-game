@@ -1,70 +1,142 @@
 using UnityEngine;
 using UnityEngine.Events; // Needed for UnityEvent
+using UnityEngine.SceneManagement; // Needed for reloading scene
+using System.Collections; // Needed for Coroutine
 
+// Manages player health and triggers death sequence (fade/reload).
+// Also triggers initial scene fade-in.
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Health Settings")]
-    [SerializeField] private int maxHealth = 100;
-    [SerializeField] private bool isInvincible = false;
+    [SerializeField]
+    [Tooltip("Maximum and starting health.")]
+    private int maxHealth = 100;
+
+    [SerializeField]
+    [Tooltip("Check this box to prevent the player from taking damage.")]
+    private bool isInvincible = false;
+
+    // Tracks current health
     private int currentHealth;
 
     // Event to notify other scripts (like UI) when health changes
     // Passes current health and max health
     public UnityEvent<int, int> OnHealthChanged;
 
+    // Optional: Add a reference to a movement script to disable on death
+    // [SerializeField] private YourVRMovementScript vrMovement; // Example
+
     void Start()
     {
         currentHealth = maxHealth;
-        // Trigger the event initially to show starting health
+        // Trigger the event initially to show starting health on UI
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
         Debug.Log($"Player health initialized: {currentHealth}/{maxHealth}");
+
+        // --- ADDED SECTION FOR FADE-IN ---
+        // Ensure ScreenFader exists and fade IN from black (to alpha 0)
+        // This relies on ScreenFader running its Awake() first (check Script Execution Order)
+        if (ScreenFader.Instance != null)
+        {
+            Debug.Log("PlayerHealth.Start: Calling ScreenFader FadeIn (FadeToColor Black, Alpha 0)");
+            // Fade TO Alpha 0 (transparent) using Black as the base color over 1 second (default duration)
+            ScreenFader.Instance.FadeToColor(Color.black, 0f, 1.0f);
+            // Alternatively, if FadeScreen image is already black and opaque:
+            // ScreenFader.Instance.FadeAlpha(0f, 1.0f);
+        }
+        else
+        {
+            // This might happen if Script Execution Order is wrong or ScreenFader object is inactive
+            Debug.LogWarning("PlayerHealth.Start: ScreenFader.Instance was null. Cannot perform fade-in.");
+        }
+        // --- END ADDED SECTION ---
     }
 
+    // Method called by enemies or hazards to deal damage
     public void TakeDamage(int damageAmount)
     {
-        // --- ADD THIS CHECK ---
+        // Ignore damage if invincible
         if (isInvincible)
         {
-            Debug.Log("Player is invincible. Damage ignored."); // Optional debug message
-            return; // Exit the method immediately, no damage taken
+            // Debug.Log("Player is invincible. Damage ignored."); // Optional debug
+            return; // Exit the method immediately
         }
-        // --- END OF ADDED CHECK ---
 
-        if (currentHealth <= 0) return; // Already dead
+        // Ignore damage if already dead
+        if (currentHealth <= 0) return;
 
+        // Apply damage
         currentHealth -= damageAmount;
+        // Clamp health between 0 and maxHealth
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         Debug.Log($"Player took {damageAmount} damage. Current health: {currentHealth}/{maxHealth}");
 
+        // Notify listeners (like UI) that health changed
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
+        // Check if player died
         if (currentHealth <= 0)
         {
             Die();
         }
     }
 
+    // Handles triggering the player's death sequence
     private void Die()
     {
         Debug.Log("Player has died!");
-        // Add death logic here later (e.g., game over screen, respawn)
-        // For now, maybe just disable the player controller or the whole object
-        // GetComponent<PlayerMovementScript>()?.enabled = false; // Replace with your actual movement script name
-        gameObject.SetActive(false); // Simple way to stop interaction
+
+        // --- Trigger Death Sequence Coroutine ---
+        // Optional: Disable player controls immediately here if needed
+        // var playerController = GetComponent<YourVRControllerScript>();
+        // if(playerController != null) playerController.enabled = false;
+
+        // Start the coroutine that handles fading and reloading
+        StartCoroutine(DeathSequenceCoroutine());
+        // --- End Trigger ---
     }
 
-    // Optional: Add a way to heal
+    // --- Coroutine for death sequence (fade out and reload) ---
+    private IEnumerator DeathSequenceCoroutine()
+    {
+        // 1. Start Fade Out to black and wait for it to finish
+        if (ScreenFader.Instance != null)
+        {
+             Debug.Log("Starting fade to black for death...");
+             // Call FadeToColor and wait for the coroutine it returns to complete
+             yield return ScreenFader.Instance.FadeToColor(Color.black, 1f, 1.0f); // Fade to black (alpha 1) over 1 second
+             Debug.Log("Fade to black complete.");
+        }
+        else
+        {
+            // Fallback if ScreenFader isn't found
+            Debug.LogError("ScreenFader Instance not found! Cannot fade on death. Reloading immediately.", gameObject);
+        }
+
+        // 2. Reload the scene AFTER the fade (or immediately if no fader)
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.buildIndex);
+        // Debug log for reload might not show if scene reloads instantly
+        // Debug.Log($"Reloading scene after death: {currentScene.name}");
+    }
+    // --- END Coroutine ---
+
+
+    // Optional: Add a way to heal the player
     public void Heal(int healAmount)
     {
-        if (currentHealth <= 0) return; // Can't heal if dead
+        // Can't heal if already dead
+        if (currentHealth <= 0) return;
 
+        // Add health
         currentHealth += healAmount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // Prevent health > maxHealth
+        // Clamp health to maxHealth
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         Debug.Log($"Player healed {healAmount}. Current health: {currentHealth}/{maxHealth}");
 
-        // Trigger the event to update UI etc.
+        // Notify listeners (like UI) that health changed
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
@@ -74,8 +146,9 @@ public class PlayerHealth : MonoBehaviour
         return currentHealth;
     }
 
+    // Allow other scripts to check max health if needed
     public int GetMaxHealth()
     {
         return maxHealth;
     }
-}
+} // End of class PlayerHealth
