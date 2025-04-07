@@ -20,6 +20,17 @@ public class EnemyHealth : MonoBehaviour
     private int currentHealth;
     private bool isInvincible = false; // Current invincibility state
 
+    [Header("Audio")]
+    [SerializeField]
+    [Tooltip("Sound played when the enemy takes damage")]
+    private AudioClip damagedSound;
+    
+    [SerializeField]
+    [Tooltip("Sound played when the enemy dies")]
+    private AudioClip deathSound;
+    
+    private AudioSource audioSource;
+
     [Header("Disintegration Effect")]
     [Tooltip("Should the enemy fall apart into pieces on death? Requires child GameObjects for pieces.")]
     [SerializeField]
@@ -50,6 +61,12 @@ public class EnemyHealth : MonoBehaviour
     void Awake() // Use Awake to set initial invincibility before Start
     {
         isInvincible = startInvincible; // Set initial state based on Inspector
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     void Start()
@@ -78,10 +95,13 @@ public class EnemyHealth : MonoBehaviour
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
+        PlaySound(damagedSound);
+
         // Debug.Log($"Enemy '{gameObject.name}' took {damageAmount} damage. Current health: {currentHealth}/{maxHealth}", gameObject); // Optional log
 
         if (currentHealth <= 0)
         {
+            //PlaySound(deathSound);
             Die(); // Trigger the death sequence
         }
     }
@@ -101,6 +121,36 @@ public class EnemyHealth : MonoBehaviour
     {
         // Log death event
         Debug.Log($"Enemy '{gameObject.name}' has died!", gameObject);
+
+    if (deathSound != null)
+    {
+        // Create a new GameObject that will persist after this object is destroyed
+        GameObject soundObject = new GameObject($"{gameObject.name}_DeathSound");
+        
+        // Position the sound object at the enemy's location
+        soundObject.transform.position = transform.position;
+        
+        AudioSource soundSource = soundObject.AddComponent<AudioSource>();
+        soundSource.clip = deathSound;
+        soundSource.spatialBlend = 1.0f; // 3D sound
+        soundSource.volume = 1.0f; // Ensure full volume
+        soundSource.rolloffMode = AudioRolloffMode.Linear; // Better distance attenuation
+        soundSource.minDistance = 1f;
+        soundSource.maxDistance = 20f;
+        
+        // Play the sound (using PlayOneShot is more reliable)
+        soundSource.PlayOneShot(deathSound);
+        
+        // Debug confirmation
+        Debug.Log($"Playing death sound for {gameObject.name} at position {soundObject.transform.position}");
+        
+        // Destroy the sound object after the clip finishes
+        Destroy(soundObject, deathSound.length + 0.5f); // Added extra buffer time
+    }
+    else
+    {
+        Debug.LogWarning($"No death sound assigned to {gameObject.name}", gameObject);
+    }
 
         // Optional: Trigger death event for other systems
         // OnEnemyDied?.Invoke();
@@ -211,5 +261,13 @@ public class EnemyHealth : MonoBehaviour
     public int GetMaxHealth()
     {
         return maxHealth;
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
     }
 } // End of class EnemyHealth

@@ -12,6 +12,12 @@ public class ScreenFader : MonoBehaviour
     [Tooltip("How long the fade in/out animation takes in seconds.")]
     [SerializeField] private float defaultFadeDuration = 1.0f;
 
+    [SerializeField] private GameObject youDiedText;
+
+    private bool isDeathFade = false;
+
+
+
     // Singleton pattern
     public static ScreenFader Instance { get; private set; }
 
@@ -40,6 +46,11 @@ public class ScreenFader : MonoBehaviour
         // Start fully transparent, regardless of initial image color
         SetAlpha(0f);
         fadeImage.gameObject.SetActive(false); // Start inactive
+
+        if (youDiedText != null)
+        {
+            youDiedText.SetActive(false);
+        }
     }
 
     // --- Public Methods to Trigger Fades ---
@@ -76,7 +87,7 @@ public class ScreenFader : MonoBehaviour
         fadeImage.gameObject.SetActive(true);
 
         float timer = 0f;
-        Color currentColor = fadeImage.color; // Get current base color
+        Color currentColor = fadeImage.color;
 
         // Set starting alpha explicitly
         SetAlpha(startAlpha);
@@ -88,19 +99,30 @@ public class ScreenFader : MonoBehaviour
             float progress = Mathf.Clamp01(timer / duration);
             float newAlpha = Mathf.Lerp(startAlpha, targetAlpha, progress);
             SetAlpha(newAlpha);
-            yield return null; // Wait for the next frame
+            yield return null;
         }
 
         // Ensure target alpha is set exactly at the end
         SetAlpha(targetAlpha);
 
-        // If fading fully transparent, disable the image object
+        // Show "You Died" if fading fully to black and this is a death fade
+        if (targetAlpha == 1f && isDeathFade && youDiedText != null)
+        {
+            Debug.Log("Showing 'You Died' text");
+            youDiedText.SetActive(true);
+        }
+
+        // If fading fully transparent, disable image and hide text
         if (targetAlpha == 0f)
         {
             fadeImage.gameObject.SetActive(false);
+            if (youDiedText != null) 
+            {
+                youDiedText.SetActive(false);
+            }
         }
 
-        currentFadeCoroutine = null; // Mark fade as complete
+        currentFadeCoroutine = null;
     }
 
     // Helper to set alpha only
@@ -122,4 +144,28 @@ public class ScreenFader : MonoBehaviour
         SceneManager.LoadScene(currentScene.buildIndex);
         Debug.Log($"Reloading scene: {currentScene.name}");
     }
+
+    private void LateUpdate()
+    {
+        // Optional: always face the camera
+        if (fadeImage != null && fadeImage.canvas != null)
+        {
+            fadeImage.canvas.transform.forward = Camera.main.transform.forward;
+        }
+    }
+
+
+    // Call this before FadeToColor when it's a death fade
+    public void SetIsDeathFade(bool value)
+    {
+        Debug.Log($"Setting isDeathFade to: {value}");
+        isDeathFade = value;
+        
+        // If we're setting it to false, make sure the text is hidden
+        if (!value && youDiedText != null)
+        {
+            youDiedText.SetActive(false);
+        }
+    }
+
 }

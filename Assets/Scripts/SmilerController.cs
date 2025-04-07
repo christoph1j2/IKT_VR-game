@@ -13,6 +13,12 @@ public class SmilerController : MonoBehaviour
     [Tooltip("Adjust this if the model needs to be rotated to face correctly")]
     public float visualRotationOffset = 90f;
 
+    [Header("Audio")]
+    [SerializeField]
+    [Tooltip("Sound played when Smiler detects and starts following the player")]
+    private AudioClip detectionSound;
+    private AudioSource audioSource;
+
     [Header("Arm Animation")]
     public Transform leftArm;
     public Transform rightArm;
@@ -32,6 +38,8 @@ public class SmilerController : MonoBehaviour
 
     // Track if arms are raised
     private bool armsRaised = false;
+    // Track if following player
+    private bool isFollowingPlayer = false;
 
     [Header("References")]
     private Transform playerTransform;
@@ -53,6 +61,13 @@ public class SmilerController : MonoBehaviour
             return;
         }
         playerTransform = player.transform;
+
+        // Get or add AudioSource
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
 
         // Store initial arm rotations
         if (leftArm != null)
@@ -114,12 +129,26 @@ public class SmilerController : MonoBehaviour
         if (!isSetupComplete || playerTransform == null) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        bool playerInRange = distanceToPlayer <= detectionRange;
 
         FacePlayer();
-        UpdateArmPositions(distanceToPlayer <= detectionRange);
+        UpdateArmPositions(playerInRange);
+
+        // Check if detection state has changed
+        if (playerInRange && !isFollowingPlayer)
+        {
+            // Just started following
+            isFollowingPlayer = true;
+            PlaySound(detectionSound);
+        }
+        else if (!playerInRange && isFollowingPlayer)
+        {
+            // Just stopped following
+            isFollowingPlayer = false;
+        }
 
         // Movement Logic (only based on detection range now)
-        if (distanceToPlayer <= detectionRange)
+        if (playerInRange)
         {
             // Move towards player
             if (useNavMesh && navAgent != null && navAgent.enabled)
@@ -184,5 +213,13 @@ public class SmilerController : MonoBehaviour
     {
         Gizmos.color = Color.yellow; // Only draw detection range now
         Gizmos.DrawWireSphere(transform.position, detectionRange);
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
     }
 }

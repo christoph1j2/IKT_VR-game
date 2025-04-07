@@ -14,6 +14,12 @@ public class StarfishController : MonoBehaviour
     public float fallSpeed = 5f; // Used if Rigidbody gravity is off
     public float fallRotationDuration = 0.5f; // Time to rotate 180 degrees
 
+    [Header("Audio")]
+    [SerializeField]
+    [Tooltip("Sound played when starfish lands and starts following the player")]
+    private AudioClip landingSound;
+    private AudioSource audioSource;
+
     // States
     private enum StarfishState { Waiting, Falling, Following }
     private StarfishState currentState = StarfishState.Waiting;
@@ -34,6 +40,12 @@ public class StarfishController : MonoBehaviour
     {
         // Get renderers
         renderers = GetComponentsInChildren<Renderer>();
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
 
         // Check for a collider (important for landing)
         Collider col = GetComponent<Collider>();
@@ -148,6 +160,8 @@ public class StarfishController : MonoBehaviour
             // For simplicity, we assume any collision while falling means landing.
             currentState = StarfishState.Following;
 
+            PlaySound(landingSound);
+
             // Configure Rigidbody/NavMesh for following
             if (useNavMesh && navAgent != null)
             {
@@ -238,5 +252,13 @@ public class StarfishController : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
     }
 }

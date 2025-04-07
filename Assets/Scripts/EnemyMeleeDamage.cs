@@ -18,6 +18,10 @@ public class EnemyMeleeDamage : MonoBehaviour
     [Tooltip("Enable or disable this enemy's melee damage.")]
     public bool damageEnabled = true; // Public checkbox to enable/disable in Inspector
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip damageSound; // Sound to play when hitting player
+    private AudioSource audioSource;
+
     // Timer & State
     private float timeSinceLastDamage = 0f;
     private bool playerInRange = false; // Track if player is currently inside the trigger
@@ -47,6 +51,12 @@ public class EnemyMeleeDamage : MonoBehaviour
                 triggerCollider = currentCollider;
                 break;
             }
+        }
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) { 
+            // Auto-add AudioSource if missing
+            audioSource = gameObject.AddComponent<AudioSource>();
         }
 
         bool setupError = false;
@@ -99,6 +109,7 @@ public class EnemyMeleeDamage : MonoBehaviour
                 {
                     // Deal subsequent damage
                     playerHealth.TakeDamage(damageAmount);
+                    PlayDamageSound(); // Play damage sound
                     timeSinceLastDamage = 0f; // Reset timer after dealing damage
                 }
                 // else { Debug.LogWarning($"Player in trigger but has no PlayerHealth script!"); } // Optional Warning
@@ -121,6 +132,7 @@ public class EnemyMeleeDamage : MonoBehaviour
              {
                  // Deal first hit immediately
                  playerHealth.TakeDamage(damageAmount);
+                    PlayDamageSound(); // Play damage sound
                  timeSinceLastDamage = 0f; // Reset timer AFTER the first hit
              }
              // else { Debug.LogWarning($"Player entered trigger but has no PlayerHealth script!"); } // Optional Warning
@@ -166,6 +178,15 @@ public class EnemyMeleeDamage : MonoBehaviour
              Gizmos.DrawWireSphere(capsule.center, capsule.radius);
         }
          Gizmos.matrix = Matrix4x4.identity; // Reset matrix
+    }
+
+    private void PlayDamageSound()
+    {
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
+        if (audioSource != null && damageSound != null)
+        {
+            audioSource.PlayOneShot(damageSound);
+        }
     }
 
 } // End of class

@@ -86,7 +86,6 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         Debug.Log("Player has died!");
-
         // --- Trigger Death Sequence Coroutine ---
         // Optional: Disable player controls immediately here if needed
         // var playerController = GetComponent<YourVRControllerScript>();
@@ -100,26 +99,25 @@ public class PlayerHealth : MonoBehaviour
     // --- Coroutine for death sequence (fade out and reload) ---
     private IEnumerator DeathSequenceCoroutine()
     {
-        // 1. Start Fade Out to black and wait for it to finish
         if (ScreenFader.Instance != null)
         {
-             Debug.Log("Starting fade to black for death...");
-             // Call FadeToColor and wait for the coroutine it returns to complete
-             yield return ScreenFader.Instance.FadeToColor(Color.black, 1f, 1.0f); // Fade to black (alpha 1) over 1 second
-             Debug.Log("Fade to black complete.");
+            ScreenFader.Instance.SetIsDeathFade(true);
+            Debug.Log("Starting fade to black for death...");
+            yield return ScreenFader.Instance.FadeToColor(Color.black, 1f, 1.0f); // Fade over 1 sec
+            Debug.Log("Fade complete. Showing death screen.");
         }
         else
         {
-            // Fallback if ScreenFader isn't found
-            Debug.LogError("ScreenFader Instance not found! Cannot fade on death. Reloading immediately.", gameObject);
+            Debug.LogError("ScreenFader not found. Reloading immediately.");
         }
 
-        // 2. Reload the scene AFTER the fade (or immediately if no fader)
+        yield return new WaitForSeconds(2f); // Delay after showing "You Died"
+
+        // Reload scene
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
-        // Debug log for reload might not show if scene reloads instantly
-        // Debug.Log($"Reloading scene after death: {currentScene.name}");
     }
+
     // --- END Coroutine ---
 
 

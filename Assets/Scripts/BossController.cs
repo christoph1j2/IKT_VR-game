@@ -15,6 +15,11 @@ public class BossController : MonoBehaviour
     [Tooltip("Adjust this if the model needs to be rotated to face correctly")]
     public float visualRotationOffset = 0f;
 
+    [Header("Audio")]
+    [SerializeField]
+    [Tooltip("Sound played when the boss activates and starts following the player")]
+    private AudioClip activationSound;
+
     [Header("State")]
     [SerializeField]
     private bool canFollow = false; // Starts FALSE
@@ -24,6 +29,8 @@ public class BossController : MonoBehaviour
     private NavMeshAgent navAgent;
     private Rigidbody rb;
     private EnemyHealth enemyHealth;
+    private AudioSource audioSource;
+
 
     private bool isSetupComplete = false;
     private bool navMeshAvailable = false; // Track if NavMesh is usable
@@ -33,6 +40,12 @@ public class BossController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         navAgent = GetComponent<NavMeshAgent>(); // Try to get NavMeshAgent
         enemyHealth = GetComponent<EnemyHealth>();
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     void Start()
@@ -173,6 +186,9 @@ public class BossController : MonoBehaviour
             canFollow = true;
             Debug.Log($"[{gameObject.name}] Following behavior ACTIVATED.", gameObject);
 
+            //PlaySound(activationSound);
+
+
             // --- MAKE MOVABLE ---
             // Enable NavMesh only if it's supposed to be used AND it exists
             if (useNavMesh && navMeshAvailable && navAgent != null)
@@ -218,5 +234,13 @@ public class BossController : MonoBehaviour
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
+    }
+
+        private void PlaySound(AudioClip clip)
+    {
+        if (clip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
     }
 } // End of class BossController

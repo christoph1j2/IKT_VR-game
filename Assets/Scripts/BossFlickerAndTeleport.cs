@@ -26,10 +26,15 @@ public class BossFlickerAndTeleport : MonoBehaviour
 
     [Header("Optional Effects")]
     [Tooltip("(Optional) Sound effect to play when teleporting.")]
-    public AudioSource teleportSound;
+    [SerializeField] private AudioClip teleportSound;
+
+    [Tooltip("(Optional) Jumpscare sound to play when boss reappears.")]
+    [SerializeField] private AudioClip jumpscareSound;
 
     [Tooltip("(Optional) Particle system to play during flicker/teleport.")]
     public ParticleSystem teleportEffect;
+
+    private AudioSource audioSource; // Reference to the AudioSource component for sound effects
 
     // --- Component References ---
     private Renderer[] renderers; // Array to hold all renderers for visibility toggling
@@ -55,6 +60,13 @@ public class BossFlickerAndTeleport : MonoBehaviour
             // Log an error if the controller script is missing, as we need it later
             Debug.LogError($"[{gameObject.name}] BossFlickerAndTeleport could not find BossController script on the same GameObject! Following cannot be activated.", gameObject);
         }
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+            Debug.Log($"[{gameObject.name}] Added AudioSource component for BossFlickerAndTeleport sounds.", gameObject);
+        }
     }
 
     // Public method to be called by other scripts (like a door trigger) to start the effect
@@ -78,6 +90,11 @@ public class BossFlickerAndTeleport : MonoBehaviour
         float elapsedTime = 0f; // Timer to track flicker duration
 
         Debug.Log($"[{gameObject.name}] FlickerAndTeleportRoutine started. Duration: {flickerDuration}s", gameObject);
+
+        if (jumpscareSound != null)
+        {
+            PlayJumpscareSound(); // Play jumpscare sound if assigned
+        }
 
         // Play starting particle effect if assigned
         if (teleportEffect != null)
@@ -107,7 +124,7 @@ public class BossFlickerAndTeleport : MonoBehaviour
         // Play teleport sound effect if assigned
         if (teleportSound != null)
         {
-            teleportSound.Play();
+            PlayTeleportSound(); // Play teleport sound
         }
 
         // Short delay while invisible before teleporting (for effect)
@@ -162,6 +179,21 @@ public class BossFlickerAndTeleport : MonoBehaviour
             {
                 renderer.enabled = visible;
             }
+        }
+    }
+
+    private void PlayJumpscareSound()
+    {
+        if (jumpscareSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(jumpscareSound); // Play jumpscare sound
+        }
+    }
+    private void PlayTeleportSound()
+    {
+        if (teleportSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(teleportSound); // Play teleport sound
         }
     }
 } // End of class BossFlickerAndTeleport

@@ -1,101 +1,107 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // Needed for reloading
-using System.Collections; // Needed for Coroutine
-using TMPro; // Needed for TextMeshProUGUI
+using UnityEngine.SceneManagement;
+using System.Collections;
+using TMPro;
 
-// Attach this script to the "Finish" trigger object.
 public class FinishTrigger : MonoBehaviour
 {
     [Header("Win Sequence")]
-    [Tooltip("The TextMeshPro UI element displaying 'You Win'.")]
     [SerializeField] private TextMeshProUGUI winText;
-
-    [Tooltip("How long the 'You Win' text stays visible after fading in.")]
+//    [SerializeField] private GameObject FadeCanvas; // Canvas to fade in/out
     [SerializeField] private float winDisplayTime = 5.0f;
-
-    [Tooltip("The color to fade the screen to (e.g., white).")]
     [SerializeField] private Color fadeColor = Color.white;
-
-    [Tooltip("Duration of the fade effect.")]
     [SerializeField] private float fadeDuration = 1.5f;
+    [SerializeField] private CanvasGroup winTextCanvasGroup;
+    [SerializeField] private float textFadeDuration = 1.0f;
 
     [Header("Optional Feedback")]
-    [Tooltip("(Optional) Sound effect to play on finish.")]
     [SerializeField] private AudioSource successSound;
 
-    // Prevent triggering multiple times
     private bool hasFinished = false;
+    //private CanvasGroup winTextCanvasGroup;
 
     private void Start()
     {
-        // Ensure collider is a trigger
         Collider col = GetComponent<Collider>();
         if (col == null || !col.isTrigger)
         {
             Debug.LogWarning($"FinishTrigger on '{gameObject.name}' requires a Collider with 'Is Trigger' checked.", gameObject);
         }
 
-        // Ensure Win Text is assigned and disable it initially
         if (winText == null)
         {
-            Debug.LogError($"Win Text is not assigned in the FinishTrigger script on '{gameObject.name}'!", gameObject);
+            Debug.LogError($"Win Text is not assigned!", gameObject);
         }
         else
         {
-            winText.gameObject.SetActive(false); // Start hidden
+            winText.gameObject.SetActive(true); // Make sure it's enabled
+            winTextCanvasGroup = winText.GetComponent<CanvasGroup>();
+            if (winTextCanvasGroup == null)
+            {
+                winTextCanvasGroup = winText.gameObject.AddComponent<CanvasGroup>();
+            }
+            winTextCanvasGroup.alpha = 0f; // Hide initially
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Check if already finished or if it's not the player
-        if (hasFinished || !other.CompareTag("Player"))
-        {
-            return;
-        }
-
-        // Mark as finished to prevent re-triggering
+        if (hasFinished || !other.CompareTag("Player")) return;
         hasFinished = true;
-        Debug.Log($"Player touched Finish object '{gameObject.name}'. Starting Win Sequence.");
-
-        // Start the win sequence coroutine
         StartCoroutine(WinSequenceCoroutine());
     }
 
     private IEnumerator WinSequenceCoroutine()
     {
-        // 1. Play Sound (Optional)
-        if (successSound != null)
+        if (successSound != null) successSound.Play();
+
+        // Fade in the text BEFORE fading the screen
+        if (winTextCanvasGroup != null)
         {
-            successSound.Play();
+            yield return StartCoroutine(FadeInText(winTextCanvasGroup, textFadeDuration));
         }
 
-        // 2. Activate Win Text
-        if (winText != null)
-        {
-            winText.gameObject.SetActive(true);
-        }
+        // Short pause to let text settle
+        yield return new WaitForSeconds(0.5f);
 
-        // 3. Start Fade Out to specified color and wait for it to finish
+        // Fade the screen
         if (ScreenFader.Instance != null)
         {
-            Debug.Log("Starting fade to white...");
-            // Start the fade AND wait for the coroutine it returns to complete
+            ScreenFader.Instance.SetIsDeathFade(false); // This is a win, not a death
             yield return ScreenFader.Instance.FadeToColor(fadeColor, 1f, fadeDuration);
-            Debug.Log("Fade to white complete.");
-        }
-        else
-        {
-            Debug.LogError("ScreenFader Instance not found! Cannot fade.", gameObject);
         }
 
-        // 4. Wait for the specified display time
-        Debug.Log($"Waiting {winDisplayTime} seconds...");
+
         yield return new WaitForSeconds(winDisplayTime);
 
-        // 5. Reload the current scene
-        Debug.Log("Reloading scene...");
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("MainMenuScene"); // Load the main menu scene
+    }
+
+
+    // private IEnumerator FadeInText(CanvasGroup canvasGroup, float duration)
+    // {
+    //     float elapsed = 0f;
+    //     while (elapsed < duration)
+    //     {
+    //         canvasGroup.alpha = Mathf.Lerp(0f, 1f, elapsed / duration);
+    //         elapsed += Time.deltaTime;
+    //         yield return null;
+    //     }
+    //     canvasGroup.alpha = 1f;
+    // }
+
+    private IEnumerator FadeInText(CanvasGroup canvasGroup, float duration)
+    {
+        canvasGroup.alpha = 0f;
+        canvasGroup.gameObject.SetActive(true);
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Clamp01(elapsed / duration);
+            yield return null;
+        }
     }
 }
