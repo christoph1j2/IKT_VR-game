@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class MenuManager : MonoBehaviour
 {
@@ -6,20 +8,10 @@ public class MenuManager : MonoBehaviour
     
     public void StartGame()
     {
-        Debug.Log("Starting game and morphing player...");
-        
-        // Find the transition manager or create one if it doesn't exist
-        SceneTransitionManager transitionManager = FindObjectOfType<SceneTransitionManager>();
-        if (transitionManager == null)
-        {
-            GameObject managerObject = new GameObject("SceneTransitionManager");
-            transitionManager = managerObject.AddComponent<SceneTransitionManager>();
-        }
-        
-        // Start the transition
-        transitionManager.TransitionToMainScene(playerTransform);
+        Debug.Log("Starting game...");
+        SceneManager.LoadScene("MainScene");
     }
-
+    
     public void ExitGame()
     {
         Debug.Log("Exiting game...");
