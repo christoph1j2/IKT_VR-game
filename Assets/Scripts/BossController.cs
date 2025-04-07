@@ -5,25 +5,35 @@ using UnityEngine.AI; // Include if using NavMesh
 public class BossController : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float moveSpeed = 3f; // Boss might be faster/slower than Smiler
-    public float rotationSpeed = 6f; // Speed for turning
-    public float detectionRange = 15f; // Range to start following (after activated)
+    public float moveSpeed = 3f;
+    public float rotationSpeed = 6f;
+    public float detectionRange = 15f;
+    [Tooltip("Use Unity's NavMesh system for pathfinding? Requires NavMeshAgent component.")]
     public bool useNavMesh = false; // Set true if using NavMesh
 
     [Header("Visual Settings")]
     [Tooltip("Adjust this if the model needs to be rotated to face correctly")]
-    public float visualRotationOffset = 0f; // Adjust if needed
+    public float visualRotationOffset = 0f;
 
     [Header("State")]
-    [SerializeField] // Show in inspector for debugging, but controlled by ActivateFollowing()
-    private bool canFollow = false; // Starts as FALSE - only faces player initially
+    [SerializeField]
+    private bool canFollow = false; // Starts FALSE
 
-    // References
+    // --- Component References ---
     private Transform playerTransform;
     private NavMeshAgent navAgent;
     private Rigidbody rb;
+    private EnemyHealth enemyHealth;
 
     private bool isSetupComplete = false;
+    private bool navMeshAvailable = false; // Track if NavMesh is usable
+
+    void Awake() // Get components early
+    {
+        rb = GetComponent<Rigidbody>();
+        navAgent = GetComponent<NavMeshAgent>(); // Try to get NavMeshAgent
+        enemyHealth = GetComponent<EnemyHealth>();
+    }
 
     void Start()
     {
@@ -31,87 +41,108 @@ public class BossController : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player == null)
         {
-            Debug.LogError($"[{gameObject.name}] Player object not found! Make sure Player has the 'Player' tag. Disabling BossController.", gameObject);
+            Debug.LogError($"[{gameObject.name}] Player object not found! Disabling BossController.", gameObject);
             enabled = false;
             return;
         }
         playerTransform = player.transform;
 
-        // Get Rigidbody component
-        rb = GetComponent<Rigidbody>();
-        if (rb != null)
+        if (enemyHealth == null)
         {
-            rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ; // Prevent tipping
+            Debug.LogWarning($"[{gameObject.name}] BossController did not find EnemyHealth script. Boss cannot become vulnerable.", gameObject);
         }
 
-        // Setup NavMesh if enabled
-        navAgent = GetComponent<NavMeshAgent>();
+        // Configure Rigidbody if it exists
+        if (rb != null)
+        {
+            rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+            rb.isKinematic = true; // Start kinematic (immovable)
+        }
+
+        // Setup NavMeshAgent if intended AND component exists
         if (useNavMesh)
         {
             if (navAgent == null)
             {
-                Debug.LogWarning($"[{gameObject.name}] useNavMesh is true, but no NavMeshAgent component found. Adding one.", gameObject);
-                navAgent = gameObject.AddComponent<NavMeshAgent>();
+                // --- ERROR HANDLING ---
+                Debug.LogError($"[{gameObject.name}] 'Use Nav Mesh' is checked, but no NavMeshAgent component found! Please add one or uncheck 'Use Nav Mesh'. Disabling NavMesh logic.", gameObject);
+                navMeshAvailable = false; // Mark NavMesh as unavailable
+                // --- END ERROR HANDLING ---
             }
-            navAgent.speed = moveSpeed;
-            navAgent.angularSpeed = rotationSpeed * 100;
-            navAgent.acceleration = 8f; // Adjust as needed
-            // Set stopping distance based on how close you want it to get
-            navAgent.stoppingDistance = 1.5f; // Example stopping distance
-            navAgent.enabled = true; // Enable NavMesh agent
+            else // NavMeshAgent exists
+            {
+                navMeshAvailable = true; // Mark NavMesh as available
+                navAgent.speed = moveSpeed;
+                navAgent.angularSpeed = rotationSpeed * 100;
+                navAgent.acceleration = 8f;
+                navAgent.stoppingDistance = 1.5f;
+                navAgent.enabled = false; // Start disabled (will be enabled in ActivateFollowing)
 
-            // Disable Rigidbody physics if using NavMesh
-            if (rb != null) { rb.isKinematic = true; rb.useGravity = false; }
+                // Ensure Rigidbody is kinematic if using NavMesh
+                if (rb != null) { rb.isKinematic = true; rb.useGravity = false; }
+                Debug.Log($"[{gameObject.name}] NavMeshAgent configured but initially disabled.", gameObject);
+            }
         }
-        else if (navAgent != null)
+        else // Not using NavMesh
         {
-            // Ensure NavMeshAgent is disabled if not using it
-            navAgent.enabled = false;
-            // Ensure Rigidbody is active if NavMesh is off
-            if (rb != null) { rb.isKinematic = false; rb.useGravity = true; }
+            navMeshAvailable = false;
+            if (navAgent != null)
+            {
+                navAgent.enabled = false; // Ensure disabled if not using it
+            }
+            // Ensure Rigidbody is ready if NavMesh is off (will be made non-kinematic later)
+            if (rb != null)
+            {
+                 // Keep it kinematic until ActivateFollowing is called
+                 rb.isKinematic = true;
+                 rb.useGravity = false; // Gravity will be enabled if made non-kinematic
+            }
         }
 
-        // Check for collider if using Rigidbody physics
+        // Collider check (kept from before)
         Collider col = GetComponent<Collider>();
         if (col == null) col = GetComponentInChildren<Collider>();
         if (col == null && rb != null && !rb.isKinematic)
         {
-             Debug.LogError($"[{gameObject.name}] BossController has an active Rigidbody but no Collider! Add one.", gameObject);
+             Debug.LogError($"[{gameObject.name}] BossController has an active Rigidbody but no Collider!", gameObject);
         }
 
         isSetupComplete = true;
-        Debug.Log($"[{gameObject.name}] BossController setup complete. Initial canFollow state: {canFollow}", gameObject);
+        Debug.Log($"[{gameObject.name}] BossController setup complete. Initial canFollow: {canFollow}, NavMesh Available: {navMeshAvailable}", gameObject);
     }
 
     void Update()
     {
         if (!isSetupComplete || playerTransform == null) return;
 
-        // --- Always Face the Player ---
+        // Always Face the Player
         FacePlayer();
 
-        // --- Movement Logic (Only if canFollow is true) ---
+        // Movement Logic (Only if canFollow is true)
         if (canFollow)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
             if (distanceToPlayer <= detectionRange)
             {
-                // Move towards player
-                if (useNavMesh && navAgent != null && navAgent.enabled)
+                // --- Move Towards Player ---
+                // Check if NavMesh should be used AND is available/enabled
+                if (useNavMesh && navMeshAvailable && navAgent != null && navAgent.enabled)
                 {
                     navAgent.SetDestination(playerTransform.position);
                 }
-                else if (rb != null && !rb.isKinematic) // Use Rigidbody movement
+                // Otherwise, use Rigidbody if available and not kinematic
+                else if (rb != null && !rb.isKinematic)
                 {
                     Vector3 direction = playerTransform.position - transform.position;
                     direction.y = 0;
                     direction.Normalize();
                     Vector3 targetVelocity = direction * moveSpeed;
-                    targetVelocity.y = rb.linearVelocity.y; // Preserve gravity
+                    targetVelocity.y = rb.linearVelocity.y;
                     rb.linearVelocity = targetVelocity;
                 }
-                else if (!useNavMesh) // Fallback to transform movement
+                // Fallback to transform movement if not using NavMesh and no suitable Rigidbody
+                else if (!useNavMesh)
                 {
                     Vector3 direction = playerTransform.position - transform.position;
                     direction.y = 0;
@@ -119,63 +150,73 @@ public class BossController : MonoBehaviour
                     transform.position += direction * moveSpeed * Time.deltaTime;
                 }
             }
-            else // Player is outside detection range (but following is active)
+            else // Player is outside detection range (but following IS active)
             {
-                // Stop Movement
-                if (useNavMesh && navAgent != null && navAgent.enabled)
+                // --- Stop Movement ---
+                if (useNavMesh && navMeshAvailable && navAgent != null && navAgent.enabled)
                 {
-                    if (navAgent.hasPath) navAgent.ResetPath(); // Stop NavMesh agent
+                    if (navAgent.hasPath) navAgent.ResetPath();
                 }
                 else if (rb != null && !rb.isKinematic)
                 {
-                    rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0); // Stop horizontal Rigidbody movement
+                    rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
                 }
             }
         }
-        // --- End Movement Logic ---
     }
 
-    // --- Public function to enable following behavior ---
+    // Public function to enable following behavior AND disable invincibility
     public void ActivateFollowing()
     {
         if (!canFollow) // Only activate and log once
         {
             canFollow = true;
             Debug.Log($"[{gameObject.name}] Following behavior ACTIVATED.", gameObject);
-            // Optional: Re-enable NavMesh Agent if it was disabled initially
-            if (useNavMesh && navAgent != null)
+
+            // --- MAKE MOVABLE ---
+            // Enable NavMesh only if it's supposed to be used AND it exists
+            if (useNavMesh && navMeshAvailable && navAgent != null)
             {
                 navAgent.enabled = true;
+                Debug.Log($"[{gameObject.name}] NavMeshAgent enabled.", gameObject);
             }
+            // Otherwise, make Rigidbody non-kinematic if it exists
+            else if (rb != null)
+            {
+                rb.isKinematic = false;
+                rb.useGravity = true; // Enable gravity when physics takes over
+                Debug.Log($"[{gameObject.name}] Rigidbody set to non-kinematic.", gameObject);
+            }
+            // --- END MAKE MOVABLE ---
+
+            // --- MAKE VULNERABLE ---
+            if (enemyHealth != null)
+            {
+                enemyHealth.BecomeVulnerable();
+            }
+            else { Debug.LogWarning($"[{gameObject.name}] Cannot make vulnerable: EnemyHealth reference missing."); }
+            // --- END MAKE VULNERABLE ---
         }
     }
 
-    // --- FacePlayer method ---
+    // FacePlayer method (remains the same)
     private void FacePlayer()
     {
         if (playerTransform == null) return;
-
         Vector3 direction = playerTransform.position - transform.position;
-        direction.y = 0; // Keep rotation horizontal
-
+        direction.y = 0;
         if (direction != Vector3.zero)
         {
             Quaternion lookRotation = Quaternion.LookRotation(direction);
-            // Apply visual offset if needed
-            if (visualRotationOffset != 0)
-            {
-                lookRotation *= Quaternion.Euler(0, visualRotationOffset, 0);
-            }
+            if (visualRotationOffset != 0) { lookRotation *= Quaternion.Euler(0, visualRotationOffset, 0); }
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
         }
     }
 
-    // --- Optional: Visualize detection range ---
+    // OnDrawGizmosSelected method (remains the same)
     private void OnDrawGizmosSelected()
     {
-        // Only draw gizmo if following is potentially active
-        // Or always draw it for setup purposes
-        Gizmos.color = Color.magenta; // Use a different color for the boss
+        Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
-}
+} // End of class BossController

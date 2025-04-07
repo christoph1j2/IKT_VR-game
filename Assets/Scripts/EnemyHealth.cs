@@ -4,97 +4,127 @@ using System.Collections.Generic;
 using System.Linq;
 
 // Manages the health of an enemy and handles its death sequence,
-// including an optional disintegration effect (fall apart only).
+// including an optional disintegration effect. Can start invincible.
 public class EnemyHealth : MonoBehaviour
 {
     [Header("Health Settings")]
     [SerializeField]
     [Tooltip("Maximum and starting health of the enemy.")]
-    private int maxHealth = 50;
+    private int maxHealth = 50; // Example Boss health
+
+    [SerializeField]
+    [Tooltip("Start the enemy in an invincible state?")]
+    private bool startInvincible = false; // Set this TRUE for the Boss initially
 
     // Tracks the current health
     private int currentHealth;
+    private bool isInvincible = false; // Current invincibility state
 
     [Header("Disintegration Effect")]
     [Tooltip("Should the enemy fall apart into pieces on death? Requires child GameObjects for pieces.")]
     [SerializeField]
-    private bool fallApartOnDeath = true;
+    private bool fallApartOnDeath = true; // Maybe false for Boss? Set as needed.
 
-    // Removed Explosion Force/Radius
+    [Tooltip("Force applied to pieces when falling apart, originating from the enemy's center.")]
+    [SerializeField]
+    private float explosionForce = 50f;
+
+    [Tooltip("Radius of the explosion force origin.")]
+    [SerializeField]
+    private float explosionRadius = 1.0f;
 
     [Tooltip("Delay in seconds after falling apart before pieces are destroyed.")]
     [SerializeField]
-    private float pieceDestroyDelay = 2.0f; // Renamed for clarity, default 2 seconds
+    private float pieceDestroyDelay = 2.0f; // Renamed for clarity
 
-    // Removed Fade Duration
+    [Header("Piece Physics (Optional Overrides)")]
+    [Tooltip("Mass assigned to falling pieces (lower values move more easily).")]
+    [SerializeField] private float pieceMass = 0.5f;
+    [Tooltip("Drag assigned to falling pieces (higher values slow down faster).")]
+    [SerializeField] private float pieceDrag = 0.5f;
+
 
     // Optional: Event to trigger other actions on death (e.g., score update)
     // public UnityEvent OnEnemyDied;
 
-    // Start is called before the first frame update
+    void Awake() // Use Awake to set initial invincibility before Start
+    {
+        isInvincible = startInvincible; // Set initial state based on Inspector
+    }
+
     void Start()
     {
         currentHealth = maxHealth; // Initialize health
 
-        // Check if the GameObject has the correct tag
         if (!gameObject.CompareTag("Enemy"))
         {
-            Debug.LogWarning($"Object '{gameObject.name}' has EnemyHealth script but is not tagged 'Enemy'. Please add the tag for consistent behavior.", gameObject);
+            Debug.LogWarning($"Object '{gameObject.name}' has EnemyHealth script but is not tagged 'Enemy'. Please add the tag.", gameObject);
         }
+        Debug.Log($"[{gameObject.name}] EnemyHealth Start. Initial Invincible State: {isInvincible}");
     }
 
     // Public method to allow other scripts to deal damage to this enemy
     public void TakeDamage(int damageAmount)
     {
-        // Ignore damage if already dead
-        if (currentHealth <= 0) return;
+        // Ignore damage if invincible
+        if (isInvincible)
+        {
+            // Debug.Log($"[{gameObject.name}] Damage blocked: Currently invincible."); // Optional log
+            return; // Ignore damage if invincible
+        }
 
-        // Reduce health
+        if (currentHealth <= 0) return; // Already dead
+
         currentHealth -= damageAmount;
-        // Ensure health doesn't go below zero
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        // Log damage taken (optional)
-        // Debug.Log($"Enemy '{gameObject.name}' took {damageAmount} damage. Current health: {currentHealth}/{maxHealth}", gameObject);
+        // Debug.Log($"Enemy '{gameObject.name}' took {damageAmount} damage. Current health: {currentHealth}/{maxHealth}", gameObject); // Optional log
 
-        // Check if health has reached zero
         if (currentHealth <= 0)
         {
             Die(); // Trigger the death sequence
         }
     }
 
-    // Handles the death sequence - Simplified to only fall apart and destroy pieces after delay
+    // Public method to disable invincibility (called by BossController)
+    public void BecomeVulnerable()
+    {
+        if (isInvincible) // Only change and log if it was previously invincible
+        {
+            isInvincible = false;
+            Debug.Log($"[{gameObject.name}] Is no longer invincible.", gameObject);
+        }
+    }
+
+    // Handles the death sequence
     private void Die()
     {
         // Log death event
-        Debug.Log($"Enemy '{gameObject.name}' has died! Falling apart.", gameObject);
+        Debug.Log($"Enemy '{gameObject.name}' has died!", gameObject);
 
         // Optional: Trigger death event for other systems
         // OnEnemyDied?.Invoke();
 
-        // --- Disintegration Logic (Simplified) ---
+        // --- Disintegration Logic ---
         if (fallApartOnDeath)
         {
-            // 1. Disable main components on the root object
+            // 1. Disable main colliders on the root object
             foreach(Collider col in GetComponents<Collider>()) {
                 if (col != null) col.enabled = false;
             }
-            // Disable AI/Movement/Damage scripts
-            var smilerController = GetComponent<SmilerController>();
-            if (smilerController != null) smilerController.enabled = false;
-            var starfishController = GetComponent<StarfishController>();
-            if (starfishController != null) starfishController.enabled = false;
-            var enemyMeleeDamage = GetComponent<EnemyMeleeDamage>();
-            if (enemyMeleeDamage != null) enemyMeleeDamage.enabled = false;
-            // Add any other custom AI/Movement scripts here
 
+            // --- REMOVED component disabling lines ---
+            // GetComponent<BossController>()?.enabled = false; // REMOVED
+            // GetComponent<EnemyMeleeDamage>()?.enabled = false; // REMOVED
+            // Add any other custom AI/Movement scripts here if needed
+
+            // Stop physics/NavMesh on the root object
             Rigidbody mainRb = GetComponent<Rigidbody>();
-            if(mainRb != null) mainRb.isKinematic = true; // Stop root physics
+            if(mainRb != null) mainRb.isKinematic = true; // Make kinematic to stop external forces
             UnityEngine.AI.NavMeshAgent mainAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-            if(mainAgent != null) mainAgent.enabled = false; // Disable NavMesh
+            if(mainAgent != null) mainAgent.enabled = false; // Disable NavMesh agent
 
-            // Hide the root renderer if it exists and isn't a piece itself
+            // Optionally hide the root renderer if it exists and isn't meant to be a piece
             Renderer rootRenderer = GetComponent<Renderer>();
              if(rootRenderer != null)
              {
@@ -108,16 +138,20 @@ public class EnemyHealth : MonoBehaviour
                  if (!isChildRenderer) rootRenderer.enabled = false;
              }
 
+
             // Collect ALL relevant visual pieces' transforms
             List<Transform> piecesToProcess = new List<Transform>();
-            Renderer[] allRenderers = GetComponentsInChildren<Renderer>(true);
+            Renderer[] allRenderers = GetComponentsInChildren<Renderer>(true); // Include inactive
 
             foreach (Renderer rend in allRenderers)
             {
-                if (rend.gameObject == this.gameObject) continue; // Skip root renderer
+                // Exclude the root object's renderer if it exists and shouldn't be a piece
+                if (rend.gameObject == this.gameObject) continue;
                 piecesToProcess.Add(rend.transform);
-                rend.enabled = false; // Disable temporarily
+                // Temporarily disable renderer - will be re-enabled on the piece
+                rend.enabled = false;
             }
+
 
             // 2. Process each collected piece
             Debug.Log($"[{gameObject.name}] Processing {piecesToProcess.Count} pieces for falling apart.");
@@ -133,10 +167,12 @@ public class EnemyHealth : MonoBehaviour
                 // Add/Configure Rigidbody for physics simulation
                 Rigidbody pieceRb = piece.GetComponent<Rigidbody>();
                 if (pieceRb == null) { pieceRb = piece.gameObject.AddComponent<Rigidbody>(); }
-                // Use default mass/drag or values set on prefab piece if Rigidbody existed
+                pieceRb.mass = pieceMass; // Use inspector values
+                pieceRb.linearDamping = pieceDrag; // Use inspector values
                 pieceRb.isKinematic = false;
                 pieceRb.useGravity = true;
-                // --- NO EXPLOSION FORCE ---
+                // Apply explosion force relative to the original enemy's center
+                pieceRb.AddExplosionForce(explosionForce, transform.position, explosionRadius, 0.0f, ForceMode.Impulse); // Using Impulse
 
                 // Ensure a Collider exists for ground/other collisions
                 Collider pieceCol = piece.GetComponent<Collider>();
@@ -150,12 +186,8 @@ public class EnemyHealth : MonoBehaviour
                     pieceCol.isTrigger = false; // Ensure it's NOT a trigger
                 }
 
-                // --- DESTROY PIECE AFTER DELAY ---
-                // Use the pieceDestroyDelay variable for how long pieces last
-                Destroy(piece.gameObject, pieceDestroyDelay); // Destroy this piece after the delay
-                // --- END DESTROY ---
-
-                // --- REMOVED FadeAndDestroyPiece ---
+                // Destroy piece after delay
+                Destroy(piece.gameObject, pieceDestroyDelay);
             }
 
             // 3. Destroy the original root GameObject immediately
