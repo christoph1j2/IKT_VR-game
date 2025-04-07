@@ -20159,7 +20159,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &602607968
 Transform:
   m_ObjectHideFlags: 0
@@ -22180,7 +22180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 15
   damageInterval: 0.5
-  damageEnabled: 0
+  damageEnabled: 1
 --- !u!1 &668403912 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6092361882355835928, guid: 6d0f82f62fa19894f8f20e919cb139b3, type: 3}
@@ -27821,6 +27821,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 3d88c319821b89f4086eb24c6b2faee2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1361030873}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 3d88c319821b89f4086eb24c6b2faee2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1361030878}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 3d88c319821b89f4086eb24c6b2faee2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1361030877}
   m_SourcePrefab: {fileID: 100100000, guid: 3d88c319821b89f4086eb24c6b2faee2, type: 3}
 --- !u!1 &830984706 stripped
 GameObject:
@@ -38386,7 +38392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 10
   damageInterval: 1
-  damageEnabled: 0
+  damageEnabled: 1
 --- !u!136 &1190228267
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -59129,6 +59135,44 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.7818031, y: 58.791622, z: 6.9677033}
   m_Center: {x: -0.00020056467, y: 20.37963, z: -0.000049612463}
+--- !u!114 &1361030877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361030851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d696defe6d5a2134d94dc03ead08f437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 25
+  damageInterval: 2
+  damageEnabled: 1
+--- !u!136 &1361030878
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361030851}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.6343899
+  m_Height: 58.791622
+  m_Direction: 1
+  m_Center: {x: -0.0038072441, y: 20.379631, z: 0.44752386}
 --- !u!1 &1361268297 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5972650558336492900, guid: cfc0040cdfbb9bb419d5b1839d1d61dc, type: 3}
@@ -66482,15 +66526,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 107946, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 107946, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 114188, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 121078, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
       propertyPath: m_TagString
@@ -66740,6 +66784,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 107946, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2099136047}
+    - targetCorrespondingSourceObject: {fileID: 107946, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2099136049}
     - targetCorrespondingSourceObject: {fileID: 125964, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 53802693}
@@ -80061,6 +80108,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube Interactable
       objectReference: {fileID: 0}
+    - target: {fileID: 6640387835271095783, guid: 72138a47ec7b8714c91aa39dcdf3b714, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -83395,6 +83446,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2099136049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099136043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b3bc98400d6ade41adcaae363491ba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  isInvincible: 0
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2100199884 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4290320386054544915, guid: 43f1000b1bfca0d48a628e0b7f5d179f, type: 3}
