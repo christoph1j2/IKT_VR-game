@@ -8,13 +8,10 @@ IKT VR Game is a roguelike dungeon crawler designed specifically for virtual rea
 
 ### Key Features
 
-- **🏰 Procedural Level Generation**: Dynamic dungeon layouts using tile-based generation system
-- **⚔️ VR Melee Combat**: Intuitive sword fighting with katana weapons and dodging mechanics  
+- **⚔️ VR Melee Combat**: Intuitive sword fighting with katana weapons  
 - **📈 Progressive Difficulty**: Enemies become more challenging as players advance deeper
-- **💰 Loot & Upgrade System**: Collect currency from loot rooms to enhance player stats after death
-- **🎯 Multiple Room Types**: Start areas, trap rooms, combat encounters, loot chambers, and boss arenas
 - **👹 Atmospheric Design**: Glitch textures and jump scares create an immersive horror atmosphere
-- **🎪 Boss Battles**: Epic encounters with unique mechanics including flickering and teleportation
+- **🎪 Boss Battle**: Epic encounter with unique mechanics including flickering and teleportation
 - **🚶 VR Movement**: Full VR locomotion and interaction systems using XR Interaction Toolkit
 
 ## 🛠️ Technical Specifications
